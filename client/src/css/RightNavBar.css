@@ -1,0 +1,82 @@
+.rightNavColumn {
+    display: flex;
+    flex-direction: column;
+    padding-left: 40px;
+    padding-right: 60px;
+
+    .upcomingEvents {
+        text-align: left;
+    }
+    .upcomingEventInfo {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #d0c2c2;
+        padding: 10px;
+        border-radius: 30px;
+
+        .artistInfo {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 10px;
+
+            img {
+                width: 40px;
+                height: 40px;
+                border-radius: 100px;
+            }
+
+            .artistInfoText {
+                line-height: 0;
+
+                .date {
+                    font-size: small;
+                }
+            }
+        }
+    }
+    .suggestions{
+        text-align: left;
+
+        .suggestionsBox {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #d0c2c2;
+            padding: 10px;
+            border-radius: 30px;
+
+        .artistInfo {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 10px;
+
+            img {
+                width: 40px;
+                height: 40px;
+                border-radius: 100px;
+            }
+
+            .artistInfoText {
+                line-height: 0;
+                text-align: left;
+
+                .userName {
+                    font-size: small;
+                    }
+                }
+            }
+        }   
+    }
+    .logo {
+        width: 100px;
+        height: 30px;
+        border-radius: 100px;
+    }
+}
