@@ -1,0 +1,66 @@
+.discoverColumn {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    padding-bottom: 30px;
+    height: 80vh;
+    text-align: left;
+    
+    .userPosts {
+        overflow: scroll;
+    }
+
+    .userPost {
+        display: flex;
+        flex-direction: column;
+        background-color: #d0c2c2;
+        border-radius: 30px;
+        margin-bottom: 10px;
+
+        .postHeader {
+            display: flex;
+            flex-direction: row;
+            gap: 350px;
+            justify-content: center;
+            padding-top: 20px;
+
+            .postHeaderLeft {
+                line-height: 0;
+                text-align: left;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 10px;
+
+                .postPfp {
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 100px;
+                }
+            }
+
+            .postHeaderRight {
+                padding-top: 20px;
+            }
+            .username {
+                font-size: x-small;
+            }
+        }
+        .postDescription {
+            text-align: left;
+            width: 500px;
+            padding-left: 30px;
+        }
+        .postImages {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+
+            img {
+                width: 150px;
+                border-radius: 20px;
+            }
+        }
+    }
+}
