@@ -1,0 +1,79 @@
+.profilePage {
+    background-color: white;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 30px;
+    border-radius: 30px;
+
+    .mainPfp {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: black;
+        flex-direction: column;
+
+        img {
+            width: 150px;
+            height: 150px;
+            border-radius: 100%;
+        }
+        .userInfo {
+            line-height: 0;
+        }
+    }
+
+    .navButtons {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+        .followers {
+            line-height: 0;
+            padding: 5px;
+        }
+    }
+
+    .leftRight {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 10%;
+
+        .allInfo {
+            text-align: left;
+            line-height: 0px;
+            background-color: rgb(210, 197, 196);
+            padding: 10px;
+            border-radius: 20px;
+
+            .textBkgnd {
+                background-color: rgb(229, 227, 227);
+                padding: 15px;
+                border-radius: 10px;
+            }
+        }
+
+        .preferences {
+            text-align: left;
+            background-color: rgb(210, 197, 196);
+            padding: 10px;
+            border-radius: 20px;
+
+            .preferredItem {
+                display: flex;
+                flex-direction: row;
+                gap: 3px;
+                overflow: scroll;
+
+                button {
+                    font-size: x-small;
+                    background-color: rgb(242, 235, 235);
+                }
+            }
+        }
+    }
+}

@@ -3,7 +3,9 @@
         id: 1, 
         name: 'User Name', 
         username: '@user1234',
-        pfp: 'https://picsum.photos/200/300?random=4'
+        pfp: 'https://picsum.photos/200/300?random=4',
+        password: 'ex@mple',
+        zipcode: 123456,
     },
     "post": {
             dateCreated: '01/01/21',
