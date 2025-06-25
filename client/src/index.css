@@ -16,15 +16,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
 .container {
     display: flex;
   }
@@ -81,4 +72,12 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+footer {
+  margin: 0;
+  padding-bottom: 0;
+  bottom: 0;
+  font-size: x-small;
+  padding-top: 20px;
 }

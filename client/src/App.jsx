@@ -9,7 +9,9 @@ import '../src/css/Discover.css'
 import '../src/css/LeftNavBar.css'
 import '../src/css/RightNavBar.css'
 import '../src/css/LoginPage.css'
+import '../src/css/ProfilePage.css'
 import CreateAccount from './components/CreateAccount';
+import ProfilePage from './components/ProfilePage';
 
 function App() {
 
@@ -20,9 +22,12 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/login/create" element={<CreateAccount />} />
       </Routes>
+
+      <footer>Pulse 2025 | Created by Paloma Levy</footer>
     </>
   )
 }
