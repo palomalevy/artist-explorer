@@ -1,0 +1,62 @@
+.loginPage {
+    background-color: white;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    width: 30vw;
+    border-radius: 30px;
+    flex-wrap: wrap;
+
+    h1 {
+        margin: 0;
+        margin-bottom: 10px;
+    }
+
+    p {
+        line-height: 0;
+    }
+}
+
+
+input {
+    background-color: rgb(235, 230, 230);
+    border-radius: 15px;
+    padding: 10px;
+    color: black;
+}
+
+.loginContainer {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    justify-content: center;
+    align-items: center;
+
+    .credentials{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 20vw;
+        padding-bottom: 80px;
+        gap: 10px;
+
+        .userName {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .passWord {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    .loginButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 10vw;
+        margin-right: 10vw;
+    }
+}
