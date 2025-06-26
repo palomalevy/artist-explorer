@@ -1,5 +1,6 @@
 import React from 'react'
 import {data} from '../../temp-data/temp-data';
+import { Link } from 'react-router-dom';
 
 const LeftSideNav = () => {
   return (
@@ -16,7 +17,9 @@ const LeftSideNav = () => {
             <section className="navButtons">
                 <button>Discover</button>
                 <button>Following</button>
-                <button>Settings</button>
+                <Link to={`/profile`}>
+                     <button>Settings</button>
+                </Link>
             </section>
             <section className="createNew">
                 <button className="createButton">New</button>
