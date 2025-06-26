@@ -15,6 +15,7 @@
         background-color: #d0c2c2;
         padding: 10px;
         border-radius: 30px;
+        overflow: scroll;
 
         .artistInfo {
             display: flex;
@@ -34,10 +35,10 @@
 
                 .date {
                     font-size: small;
-                }
-            }
-        }
-    }
+                };
+            };
+        };
+    };
     .suggestions{
         text-align: left;
 
@@ -49,6 +50,8 @@
             background-color: #d0c2c2;
             padding: 10px;
             border-radius: 30px;
+            overflow: scroll;
+
 
         .artistInfo {
             display: flex;
@@ -61,7 +64,7 @@
                 width: 40px;
                 height: 40px;
                 border-radius: 100px;
-            }
+            };
 
             .artistInfoText {
                 line-height: 0;
@@ -69,14 +72,14 @@
 
                 .userName {
                     font-size: small;
-                    }
-                }
-            }
-        }   
-    }
+                    };
+                };
+            };
+        }; 
+    };
     .logo {
         width: 100px;
         height: 30px;
         border-radius: 100px;
-    }
-}
+    };
+};

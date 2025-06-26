@@ -6,7 +6,7 @@ const CreateAccount = () => {
   return (
     <section className="createAccount">
         <h1> Form to create account</h1>
-        <h2> Email, Name, username, password, birthday, gender, zip code, music genre</h2>
+        <h2> Email, Name, username, password, birthday??, gender, zip code, genre & event preferences</h2>
     </section>
     
   )

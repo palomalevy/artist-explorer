@@ -24,7 +24,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/login/create" element={<CreateAccount />} />
+        <Route path="/signup" element={<CreateAccount />} />
       </Routes>
 
       <footer>Pulse 2025 | Created by Paloma Levy</footer>
