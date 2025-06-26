@@ -17,9 +17,6 @@ function App() {
 
   return (
     <>
-      {/* <LoginPage /> */}
-      {/* <HomePage /> */}
-
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/profile" element={<ProfilePage />} />

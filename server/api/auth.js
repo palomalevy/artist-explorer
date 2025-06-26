@@ -43,17 +43,17 @@ auth.post('/login', async (req, res) => {
         where: {username} 
     })
     if (!user) {
-        res.send("wrong username")
+        res.send( { message: "wrong username" } )
         return
     }
     const isValid = await bcrypt.compare(password, user.passwordHash)
     if (!isValid) {
-        res.send("wrong password")
+        res.send( {message: "wrong password" } )
         return
     }
 
     // send a cookie
-    res.send('user auth successful')
+    res.send({ message: 'user auth successful' })
 })
 
 module.exports = auth
