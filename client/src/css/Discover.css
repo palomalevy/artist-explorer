@@ -1,10 +1,10 @@
 .discoverColumn {
     display: flex;
     flex-direction: column;
-    width: 600px;
+    width: 30vw;
     padding-bottom: 30px;
     margin-top: 30px;
-    height: 80vh;
+    height: 80%;
     text-align: left;
     
     .userPosts {
@@ -16,12 +16,12 @@
         flex-direction: column;
         background-color: #d0c2c2;
         border-radius: 30px;
-        margin-bottom: 10px;
+        margin-bottom: 3%;
 
         .postHeader {
             display: flex;
             flex-direction: row;
-            gap: 350px;
+            gap: 62%;
             justify-content: center;
             padding-top: 20px;
 
@@ -61,70 +61,6 @@
             img {
                 width: 150px;
                 border-radius: 20px;
-            }
-        }
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .discoverColumn {
-        display: flex;
-        flex-direction: column;
-
-        .userPost {
-            display: flex;
-            flex-direction: column;
-            background-color: #d0c2c2;
-            border-radius: 30px;
-            margin-bottom: 10px;
-            max-width: 50%;
-
-        .postHeader {
-            display: flex;
-            flex-direction: row;
-            gap: 5%;
-            justify-content: center;
-            padding-top: 20px;
-
-            .postHeaderLeft {
-                line-height: 0;
-                text-align: left;
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                gap: 10px;
-
-                .postPfp {
-                    width: 30px;
-                    height: 30px;
-                    border-radius: 100px;
-                }
-            }
-
-            .postHeaderRight {
-                padding-top: 20px;
-            }
-            .username {
-                font-size: x-small;
-            }
-        }
-        .postDescription {
-            text-align: left;
-            width: 50%;
-            padding-left: 30px;
-        }
-        .postImages {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            overflow: scroll;
-
-            img {
-                width: 150px;
-                border-radius: 20px;
-                }
             }
         }
     }

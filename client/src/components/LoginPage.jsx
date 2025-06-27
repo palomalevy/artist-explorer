@@ -95,8 +95,7 @@ const LoginPage = () => {
                 </div>
             </form> 
         </section>
-        <p>or</p>
-        <p>Create an account</p>
+        <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
     </section>
   );
 };

@@ -3,6 +3,7 @@
     flex-direction: column;
     padding-left: 40px;
     padding-right: 60px;
+    width: 10vw;
 
     .upcomingEvents {
         text-align: left;

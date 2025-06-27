@@ -10,6 +10,8 @@ import '../src/css/LeftNavBar.css'
 import '../src/css/RightNavBar.css'
 import '../src/css/LoginPage.css'
 import '../src/css/ProfilePage.css'
+import './index.css'
+
 import CreateAccount from './components/CreateAccount';
 import ProfilePage from './components/ProfilePage';
 
