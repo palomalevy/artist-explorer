@@ -3,16 +3,23 @@
     flex-direction: column;
     padding-left: 30px;
     padding-right: 60px;
+    width: 10vw;
+    align-items: center;
 
     .mainPfp {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         img {
-            width: 100px;
-            height: 100px;
+            width: 150px;
+            height: 150px;
             border-radius: 100px;
         }
         .userInfo {
             line-height: 1px;
             padding-bottom: 20px;
+            text-align: center;
 
             p {
                 font-size: x-small;
