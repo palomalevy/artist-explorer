@@ -4,28 +4,15 @@ import { useNavigate } from 'react-router';
 import axios from 'axios';
 
 const LoginPage = () => {
-    const [name, setName] = useState("");
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [zipcode, setZipcode] = useState("");
+    const [identifier, setIdentifier] = useState('');
+    const [password, setPassword] = useState('');
     const [error, setError] = useState('')
     const baseURL = import.meta.env.VITE_BASE_URL
     const navigate = useNavigate();
 
-    const handleNameChange = (event) => {
+    const handleIdentifierChange = (event) => {
         const value = event.target.value;
-        setName(value);
-    };
-
-    const handleUsernameChange = (event) => {
-        const value = event.target.value;
-        setUsername(value);
-    };
-
-    const handleEmailChange = (event) => {
-        const value = event.target.value;
-        setEmail(value);
+        setIdentifier(value);
     };
 
     const handlePasswordChange = (event) => {
@@ -33,34 +20,27 @@ const LoginPage = () => {
         setPassword(value)
     };
 
-    const handleZipcodeChange = (event) => {
-        const value = event.target.value;
-        setZipcode(value)
-    };
-
     const handleSubmit = async (event) => {
         event.preventDefault();
         setError('');
-        
 
         try {
             const res = await fetch(`${baseURL}/api/auth/login`, {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    username: username,
-                    password: password
+                    identifier: identifier, 
+                    password: password,
                 }),
             });
         
         if (res.ok) {
                 const data = await res.json();
                 // cookie
-                console.log(data.message)
                 if (data.message === "user auth successful") {
                     navigate('/')
-                } else if (data.message === "wrong username") {
-                    setError('Invalid username.')
+                } else if (data.message === "wrong username/email") {
+                    setError('Invalid username/email.')
                 } else if (data.message === "wrong password") {
                     setError('Invalid password.')}
             } else {
@@ -82,8 +62,8 @@ const LoginPage = () => {
                 <div className="loginContainer">
                     <div className="credentials">
                         <div className="userName">
-                            <label className="username"><b>Email or username</b></label>
-                            <input type="text" placeholder="Email or username" name="username" value={username} onChange={handleUsernameChange} required/>
+                            <label className="identifier"><b>Email or username</b></label>
+                            <input type="text" placeholder="Email or username" name="identifier" value={identifier} onChange={handleIdentifierChange} required/>
                         </div>
                         <div className="passWord">
                             <label className="password"><b>Password</b></label>
