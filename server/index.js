@@ -10,7 +10,6 @@ app.use(express.json())
 app.use(cors())
 
 app.use('/api/auth', auth)
-// app.use('/api/users', users)
 
 app.use(session({
   secret: 'pulse-artist-explorer', 
@@ -21,8 +20,6 @@ app.use(session({
 
 const PORT = process.env.PORT || 3000 
 
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`)
-})
+app.listen(PORT, () => {})
 
 module.exports = app
