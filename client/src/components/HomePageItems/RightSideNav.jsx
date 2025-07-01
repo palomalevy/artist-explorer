@@ -1,5 +1,6 @@
 import React from 'react'
 import { data } from '../../temp-data/temp-data'
+import Logout from './Logout'
 
 const RightSideNav = () => {
   return (
@@ -60,7 +61,7 @@ const RightSideNav = () => {
                     </div>
                 </article>
             </section>
-            <img className="logo" src={data[0].post.images[6]} alt="logo" />
+            <Logout />
         </section>
     </>
     
