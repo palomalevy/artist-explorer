@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
-import { useUser } from '../contexts/UserContext';
+import { useUser } from "../contexts/UserContext";
 
 const WithAuth = (WrappedComponent) => {
     const baseURL = import.meta.env.VITE_BASE_URL

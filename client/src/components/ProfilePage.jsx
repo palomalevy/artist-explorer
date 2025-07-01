@@ -1,5 +1,7 @@
 import React from 'react'
 import {data} from '../temp-data/temp-data';
+import WithAuth from './WithAuth'
+import Logout from './HomePageItems/Logout';
 
 const ProfilePage = () => {
   return (
@@ -13,16 +15,7 @@ const ProfilePage = () => {
                     <p>{data[0].user.username}</p>
                 </div>
             </section>
-            <section className="navButtons">
-                <button className="followers">
-                    <p>18 ✧</p>
-                    <p>Followers</p>
-                </button>
-                <button className="followers">
-                    <p>83 ✔</p>
-                    <p>Following</p>
-                </button>
-            </section>
+            
             <div className="leftRight">
                 <section className="profileInfo">
                     <h3>Profile Information</h3>
@@ -66,8 +59,11 @@ const ProfilePage = () => {
             </div>
 
         </section>
+        <section className="logoutButton">
+            <Logout />
+        </section>
     </>
   )
 }
 
-export default ProfilePage;
+export default WithAuth(ProfilePage);
