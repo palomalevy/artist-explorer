@@ -1,14 +1,9 @@
-const cookieParser = require("cookie-parser");
-const bcrypt = require('bcryptjs');
 const express = require('express');
-
+const bcrypt = require('bcryptjs');
 const { PrismaClient } = require('@prisma/client');
+
 const prisma = new PrismaClient();
-
 const auth = express.Router()
-const users = [
-
-]
 
 // [POST]signup
 auth.post('/signup', async (req, res) => {
@@ -48,29 +43,39 @@ auth.post('/signup', async (req, res) => {
 // [POST] login
 auth.post('/login', async (req, res) => {
     const { identifier, password} = req.body
-    var user = await prisma.user.findFirst({ 
-        where: { username: identifier } 
-    })
-    if (user === null) {
-        user = await prisma.user.findFirst({
-            where: { email: identifier }
-        });
-    }
-    if (user === null) {
-        res.send({ message: 'wrong username/email' });
-        return
-    } else {
-        const isValid = await bcrypt.compare(password, user.passwordHash)
-        if (!isValid) {
-            res.send( {message: "wrong password" } );
-            return
-        }
-    }
 
+    try {
+            var user = await prisma.user.findFirst({ 
+                where: { username: identifier } 
+            })
+            if (user === null) {
+                user = await prisma.user.findFirst({
+                    where: { email: identifier }
+                });
+            }
+            if (user === null) {
+                res.send({ message: 'wrong username/email' });
+                return
+            } else {
+                const isValid = await bcrypt.compare(password, user.passwordHash)
+                if (!isValid) {
+                    res.send( {message: "wrong password" } );
+                    return
+                }
+            }
 
-    // TODO: send a cookie here
- 
-    res.send({ message: 'user auth successful' })
+            // TODO: send a cookie here
+            req.session.userID = user.id
+            req.session.username = user.username
+
+            console.log('successfully returning session id: ', req.sessionID)
+        
+            res.send({ message: 'user auth successful' })
+
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ error: "Something went wrong during login" })
+    }
 })
 
 // [GET] sessions
@@ -92,6 +97,15 @@ auth.get('/me', async (req, res) => {
     }
 })
 
-// TODO: logout endpoint
+// [POST] logout
+auth.post('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).json({ error: 'Failed to log out' });
+    }
+    res.clearCookie('connect.sid'); // Clear the session cookie
+    res.json({ message: 'Logout successful' });
+  });
+});
 
 module.exports = auth

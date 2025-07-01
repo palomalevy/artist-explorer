@@ -21,6 +21,7 @@ model User {
   passwordHash String
   zipcode Int
   genres Genre[] @default([POP, CLASSICAL, LATIN])
+  // posts Post[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -30,3 +31,15 @@ enum Genre {
   CLASSICAL
   LATIN
 }
+
+// model Post {
+//   id         Int @id @default(autoincrement())
+//   createdAt  DateTime   @default(now())
+//   updatedAt  DateTime   @updatedAt
+//   title      String
+//   published  Boolean    @default(false)
+//   author     User       @relation(fields: [authorId], references: [id])
+//   authorId   Int
+//   music      "this is what the user will be fetching from soundcloud"
+//   genres ???? "user should be able to choose these, not create them"
+// }

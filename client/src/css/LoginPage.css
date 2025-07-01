@@ -1,7 +1,4 @@
-body {
-    background: linear-gradient(125deg,rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 28%, rgba(110, 81, 71, 1) 62%, rgba(196, 157, 157, 1) 100%) no-repeat;
 
-}
 .loginPage {
     background-color: white;
     color: black;
@@ -76,10 +73,8 @@ input {
         color: black;
         display: flex;
         flex-direction: column;
-        /* padding: 40px; */
         width: 55vw;
         border-radius: 30px;
-        /* flex-wrap: wrap; */
         justify-content: center;
         align-items: center;
         margin-top: 20vh;

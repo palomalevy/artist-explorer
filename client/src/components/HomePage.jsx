@@ -2,6 +2,7 @@ import React from 'react'
 import Discover from './HomePageItems/Discover'
 import LeftSideNav from './HomePageItems/LeftSideNav';
 import RightSideNav from './HomePageItems/RightSideNav';
+import WithAuth from './WithAuth'
 
 
 const HomePage = () => {
@@ -17,4 +18,4 @@ const HomePage = () => {
   )
 }
 
-export default HomePage;
+export default WithAuth(HomePage);
