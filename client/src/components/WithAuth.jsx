@@ -14,7 +14,7 @@ const WithAuth = (WrappedComponent) => {
                 fetch(`${baseURL}/api/auth/me`, { credentials: "include" })
                     .then((response) => response.json())
                     .then((data) => {
-                        if (data.id) { // check the response contains the user id
+                        if (data.id) {
                             setUser(data);
                         } else {
                             navigate('/login');

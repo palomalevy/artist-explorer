@@ -37,7 +37,7 @@ const LoginPage = () => {
         
         if (res.ok) {
                 const data = await res.json();
-                // cookie
+                
                 if (data.message === "user auth successful") {
                     navigate('/')
                 } else if (data.message === "wrong username/email") {
