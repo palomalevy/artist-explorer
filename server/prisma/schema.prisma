@@ -21,6 +21,7 @@ model User {
   passwordHash String
   zipcode Int
   genres Genre[] @default([POP, CLASSICAL, LATIN])
+  // posts Post[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -29,4 +30,15 @@ enum Genre {
   POP
   CLASSICAL
   LATIN
+}
+
+model Post {
+  id         Int @id @default(autoincrement())
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  title      String
+  author     User       @relation(fields: [authorId], references: [id])
+  authorId   Int
+  music      String
+//   genre     Genre
 }

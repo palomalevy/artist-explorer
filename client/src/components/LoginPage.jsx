@@ -27,6 +27,7 @@ const LoginPage = () => {
         try {
             const res = await fetch(`${baseURL}/api/auth/login`, {
                 method: 'POST',
+                credentials: 'include',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     identifier: identifier, 
@@ -36,7 +37,7 @@ const LoginPage = () => {
         
         if (res.ok) {
                 const data = await res.json();
-                // cookie
+                
                 if (data.message === "user auth successful") {
                     navigate('/')
                 } else if (data.message === "wrong username/email") {

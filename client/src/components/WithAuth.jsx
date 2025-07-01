@@ -3,29 +3,31 @@ import { useNavigate } from "react-router";
 import { useUser } from '../contexts/UserContext';
 
 const WithAuth = (WrappedComponent) => {
+    const baseURL = import.meta.env.VITE_BASE_URL
+
     return function ProtectedComponent(props) {
         const { user, setUser } = useUser();
         const navigate = useNavigate();
 
         useEffect(() => {
             if (!user) {
-                fetch("http://localhost:3000/me", { credentials: "include" })
+                fetch(`${baseURL}/api/auth/me`, { credentials: "include" })
                     .then((response) => response.json())
                     .then((data) => {
-                        if (data.id) { // Ensure the response contains the user id
-                            setUser(data); // Set the user in context
+                        if (data.id) {
+                            setUser(data);
                         } else {
-                            navigate("/login");
+                            navigate('/login');
                         }
                     })
                     .catch(() => {
-                        navigate("/login");
+                        navigate('/login');
                     });
             }
         }, [user, setUser, navigate]);
 
         if (!user) {
-            return <p>Loading...</p>; // Prevents flickering
+            return <p>Loading...</p>;
         }
 
         return <WrappedComponent {...props} />;
