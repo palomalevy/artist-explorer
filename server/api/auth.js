@@ -9,9 +9,8 @@ const auth = express.Router()
 const users = [
 
 ]
-// auth.use(helmet())
 
-// allows users to signup
+// [POST]signup
 auth.post('/signup', async (req, res) => {
     const {name, username, password, email, zipcode, genres} = req.body
     const hash = await bcrypt.hash(password, 13)
@@ -46,7 +45,7 @@ auth.post('/signup', async (req, res) => {
         res.send({ message: 'An error occurred during sign up.' });
         }
 })
-// allows users to login
+// [POST] login
 auth.post('/login', async (req, res) => {
     const { identifier, password} = req.body
     var user = await prisma.user.findFirst({ 
@@ -74,6 +73,7 @@ auth.post('/login', async (req, res) => {
     res.send({ message: 'user auth successful' })
 })
 
+// [GET] sessions
 auth.get('/me', async (req, res) => {
     if ( !req.session.userID ) {
         return res.status(401).json({message: "Not logged in."})
