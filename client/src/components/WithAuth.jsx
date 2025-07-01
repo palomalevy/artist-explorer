@@ -11,7 +11,7 @@ const WithAuth = (WrappedComponent) => {
 
         useEffect(() => {
             if (!user) {
-                fetch(`${baseURL}api/auth/me`, { credentials: "include" })
+                fetch(`${baseURL}/api/auth/me`, { credentials: "include" })
                     .then((response) => response.json())
                     .then((data) => {
                         if (data.id) { // check the response contains the user id

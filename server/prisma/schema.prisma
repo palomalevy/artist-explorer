@@ -32,14 +32,13 @@ enum Genre {
   LATIN
 }
 
-// model Post {
-//   id         Int @id @default(autoincrement())
-//   createdAt  DateTime   @default(now())
-//   updatedAt  DateTime   @updatedAt
-//   title      String
-//   published  Boolean    @default(false)
-//   author     User       @relation(fields: [authorId], references: [id])
-//   authorId   Int
-//   music      "this is what the user will be fetching from soundcloud"
-//   genres ???? "user should be able to choose these, not create them"
-// }
+model Post {
+  id         Int @id @default(autoincrement())
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  title      String
+  author     User       @relation(fields: [authorId], references: [id])
+  authorId   Int
+  music      String
+//   genre     Genre
+}

@@ -65,8 +65,10 @@ auth.post('/login', async (req, res) => {
             }
 
             // TODO: send a cookie here
+            console.log('this is the user.id: ', user.id)
             req.session.userID = user.id
             req.session.username = user.username
+            console.log('this is the cookie user: ', req.session.userID)
 
             console.log('successfully returning session id: ', req.sessionID)
         
@@ -80,6 +82,7 @@ auth.post('/login', async (req, res) => {
 
 // [GET] sessions
 auth.get('/me', async (req, res) => {
+    console.log('this is the req.session.userID: ', req.session.userID)
     if ( !req.session.userID ) {
         return res.status(401).json({message: "Not logged in."})
     }

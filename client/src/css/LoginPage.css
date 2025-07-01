@@ -7,11 +7,12 @@
     padding: 40px;
     width: 30vw;
     border-radius: 30px;
-    flex-wrap: wrap;
     margin-top: 25%;
     margin-bottom: 20%;
     justify-content: center;
     align-items: center;
+    box-shadow: 0px 0px 25px 1px #232323;
+
 
     h1 {
         margin: 0;
@@ -67,84 +68,14 @@ input {
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
     .loginPage {
         background-color: white;
         color: black;
         display: flex;
         flex-direction: column;
         width: 55vw;
-        border-radius: 30px;
         justify-content: center;
         align-items: center;
-        margin-top: 20vh;
-        margin-bottom: 21vh;
-        box-shadow: 0px 0px 25px 1px #232323;
-
-        h1 {
-            margin: 0;
-            margin-bottom: 10px;
-            font-size: xx-large;
-        }
-
-        p {
-            line-height: 0;
-            font-size: small;
-            display: flex;
-            flex-wrap: wrap;
-        }
-    }
-
-
-    input {
-        background-color: rgb(235, 230, 230);
-        border-radius: 15px;
-        padding: 10px;
-        color: black;
-    }
-
-    .loginForm {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .loginContainer {
-        display: flex;
-        flex-direction: column;
-        text-align: left;
-        justify-content: center;
-        align-items: center;
-        margin: 0px;
-
-        .credentials{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            width: 20vw;
-            padding-bottom: 80px;
-            gap: 10px;
-
-            .userName {
-                display: flex;
-                flex-direction: column;
-                /* flex-wrap: wrap; */
-                width: 20vw;
-            }
-
-            .passWord {
-                display: flex;
-                flex-direction: column;
-                /* flex-wrap: wrap; */
-                width: 20vw;
-            }
-        }
-
-        .loginButton {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-left: 10vw;
-            margin-right: 10vw;
-        }
     }
 }
