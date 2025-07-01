@@ -49,12 +49,10 @@ auth.post('/signup', async (req, res) => {
 // allows users to login
 auth.post('/login', async (req, res) => {
     const { identifier, password} = req.body
-    console.log('this is req.body: ', req.body)
     var user = await prisma.user.findFirst({ 
         where: { username: identifier } 
     })
     if (user === null) {
-        console.log('User not found by username, checking email...')
         user = await prisma.user.findFirst({
             where: { email: identifier }
         });
@@ -68,7 +66,6 @@ auth.post('/login', async (req, res) => {
             res.send( {message: "wrong password" } );
             return
         }
-        console.log('passed pwd check')
     }
 
 

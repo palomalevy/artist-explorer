@@ -15,7 +15,6 @@ const CreateAccount = () => {
   const navigate = useNavigate();
 
     useEffect(() => {
-        console.log(userData.message)
         if (userData.message === 'Username already taken!') {
           setError('Username already taken!')
         } else if (userData.message === 'Email already taken!') {
@@ -52,8 +51,6 @@ const CreateAccount = () => {
         event.preventDefault();
         setError('');
 
-        console.log('handling submit')
-
         const newUser = {
           name: event.target.name.value,
           email: event.target.email.value,
@@ -62,7 +59,6 @@ const CreateAccount = () => {
           zipcode: parseInt(event.target.zipcode.value),
         }
 
-        console.log("about to fetch from the endpoint")
         fetch(`${baseURL}/api/auth/signup`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
