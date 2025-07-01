@@ -1,0 +1,62 @@
+.createAccount {
+    background-color: white;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    width: 30vw;
+    border-radius: 30px;
+    flex-wrap: wrap;
+    margin-top: 25%;
+    margin-bottom: 20%;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+        margin: 0;
+        margin-bottom: 10px;
+        font-size: xx-large;
+    }
+
+    p {
+        line-height: 0;
+    }
+
+    .signupContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .credentials {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            .newName {
+                display: flex;
+                gap: 5px;
+                align-items: center;
+            }
+            .newEmail {
+                display: flex;
+                gap: 5px;
+                align-items: center;
+            }
+            .newUsername {
+                display: flex;
+                gap: 5px;
+                align-items: center;
+            }
+            .passwordNew {
+                display: flex;
+                gap: 5px;
+                align-items: center;
+            }
+            .zipcodeNew {
+                display: flex;
+                gap: 5px;
+                align-items: center;
+            }
+        }
+    }
+}

@@ -2,11 +2,7 @@ import React, { useState} from 'react'
 
 const LikeButton = () => {
   const [emoji, setEmoji] = useState('🖤');
-//   const handleClick = (event) => {
-//     event.stopPropagation();
-//     setEmoji(emoji === '🤍' ? '💖' : '🤍');
- 
-//   };
+//   TODO: add like button
   return (
     <button className='likeButton'>
       🤍
