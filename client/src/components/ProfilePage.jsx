@@ -5,7 +5,7 @@ import Logout from './HomePageItems/Logout';
 
 const ProfilePage = () => {
   return (
-    <>
+    <section className="profileContainer">
         <section className="profilePage">
             <div>ProfilePage</div>
             <section className="mainPfp">
@@ -26,7 +26,7 @@ const ProfilePage = () => {
                         </article>
                         <article className="Email">
                             <p>Email</p>
-                            <p className="textBkgnd">example@youremail.com</p>
+                            <p className="textBkgnd">example@youremailjnfoenif.com</p>
                         </article>
                         <article className="password">
                             <p>Password</p>
@@ -57,12 +57,11 @@ const ProfilePage = () => {
                 </section>
 
             </div>
-
+             <section className="logoutButton">
+                <Logout />
+            </section>
         </section>
-        <section className="logoutButton">
-            <Logout />
-        </section>
-    </>
+    </section>
   )
 }
 

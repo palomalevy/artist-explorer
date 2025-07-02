@@ -1,62 +1,201 @@
+.createAccountContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 97vh;
+}
 .createAccount {
-    background-color: white;
-    color: black;
-    display: flex;
-    flex-direction: column;
-    padding: 40px;
-    width: 30vw;
-    border-radius: 30px;
-    flex-wrap: wrap;
-    margin-top: 25%;
-    margin-bottom: 20%;
-    justify-content: center;
-    align-items: center;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  width: 30vw;
+  border-radius: 30px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 
     h1 {
-        margin: 0;
-        margin-bottom: 10px;
         font-size: xx-large;
     }
 
     p {
-        line-height: 0;
+        text-align: center;
+    }
+}
+
+
+input {
+    background-color: rgb(235, 230, 230);
+    border-radius: 15px;
+    padding: 5px;
+    color: black;
+}
+
+.signupContainer {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    justify-content: center;
+    align-items: center;
+
+    .credentials{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 20vw;
+        padding-bottom: 10px;
+        gap: 10px;
+
+        .newName {
+            display: flex;
+            flex-direction: column;
+        }
+        .newEmail {
+            display: flex;
+            flex-direction: column;
+        }
+        .newUsername {
+            display: flex;
+            flex-direction: column;
+        }
+        .passwordNew {
+            display: flex;
+            flex-direction: column;
+        }
+        .zipcodeNew {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    .signupButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 5vw;
+        margin-right: 5vw;
+    }
+}
+
+@media only screen and (max-width: 699px) {
+    .createAccountContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 97vh;
+    }
+    .createAccount {
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        padding: 40px;
+        width: 80vw;
+        border-radius: 30px;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+
+        h1 {
+            font-size: xx-large;
+        }
+
+        p {
+            text-align: center;
+        }
+    }
+
+
+    input {
+        background-color: rgb(235, 230, 230);
+        border-radius: 15px;
+        padding: 5px;
+        color: black;
     }
 
     .signupContainer {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        text-align: left;
+        justify-content: center;
+        align-items: center;
 
-        .credentials {
+        .credentials{
             display: flex;
             flex-direction: column;
+            justify-content: center;
+            width: 55vw;
+            padding-bottom: 10px;
             gap: 10px;
+        }
 
-            .newName {
-                display: flex;
-                gap: 5px;
-                align-items: center;
-            }
-            .newEmail {
-                display: flex;
-                gap: 5px;
-                align-items: center;
-            }
-            .newUsername {
-                display: flex;
-                gap: 5px;
-                align-items: center;
-            }
-            .passwordNew {
-                display: flex;
-                gap: 5px;
-                align-items: center;
-            }
-            .zipcodeNew {
-                display: flex;
-                gap: 5px;
-                align-items: center;
-            }
+        .signupButton {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 5vw;
+            margin-right: 5vw;
+        }
+}
+}
+
+@media only screen and (min-width: 699px) {
+    .createAccountContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 97vh;
+    }
+    .createAccount {
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        padding: 40px;
+        width: 50vw;
+        border-radius: 30px;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+
+        h1 {
+            font-size: xx-large;
+        }
+
+        p {
+            text-align: center;
         }
     }
+
+
+    input {
+        background-color: rgb(235, 230, 230);
+        border-radius: 15px;
+        padding: 5px;
+        color: black;
+    }
+
+    .signupContainer {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        justify-content: center;
+        align-items: center;
+
+        .credentials{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 30vw;
+            padding-bottom: 10px;
+            gap: 10px;
+        }
+
+        .signupButton {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 5vw;
+            margin-right: 5vw;
+        }
+}
 }

@@ -1,61 +1,57 @@
+.profileContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 97vh;
+  flex-wrap: wrap;
+}
 .profilePage {
-    background-color: white;
-    color: black;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 30px;
-    border-radius: 30px;
-    width: 20vw;
-    height: 27vw;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  border-radius: 30px;
+  justify-content: center;
+  align-items: center;
+  margin: 1vh 6vw;
+  flex-wrap: wrap;
 
     .mainPfp {
         display: flex;
         justify-content: center;
         align-items: center;
-        color: black;
         flex-direction: column;
+        padding-bottom: 10px;
+        text-align: center;
+        flex-wrap: wrap;
 
         img {
-            width: 150px;
-            height: 150px;
+            width: 100px;
+            height: 100px;
             border-radius: 100%;
-        }
-        .userInfo {
-            line-height: 0;
-        }
-    }
-
-    .navButtons {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-
-        .followers {
-            line-height: 0;
-            padding: 5px;
         }
     }
 
     .leftRight {
         display: flex;
         flex-direction: row;
-        justify-content: center;
-        gap: 10%;
+        gap: 5vw;
+        flex-wrap: wrap;
+        padding-bottom: 20px;
 
         .allInfo {
             text-align: left;
-            line-height: 0px;
             background-color: rgb(210, 197, 196);
             padding: 10px;
             border-radius: 20px;
+            flex-wrap: wrap;
 
             .textBkgnd {
+                display: flex;
                 background-color: rgb(229, 227, 227);
-                padding: 15px;
+                padding: 4px;
                 border-radius: 10px;
+                flex-wrap: wrap;
             }
         }
 
@@ -68,14 +64,92 @@
             .preferredItem {
                 display: flex;
                 flex-direction: row;
+                flex-wrap: wrap;
                 gap: 3px;
                 overflow: scroll;
+                flex-wrap: wrap;
 
                 button {
-                    font-size: x-small;
                     background-color: rgb(242, 235, 235);
                 }
             }
         }
     }
+}
+
+@media only screen and (max-width: 699px) {
+    .profilePage {
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        padding: 30px;
+        border-radius: 30px;
+        justify-content: center;
+        align-items: center;
+        margin: 1vh 6vw;
+        flex-wrap: wrap;
+
+            .mainPfp {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                padding-bottom: 10px;
+                text-align: center;
+                flex-wrap: wrap;
+
+                img {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 100%;
+                }
+            }
+
+            .leftRight {
+                display: flex;
+                flex-direction: row;
+                gap: 5vw;
+                flex-wrap: wrap;
+                padding-bottom: 20px;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+
+                .allInfo {
+                    text-align: left;
+                    background-color: rgb(210, 197, 196);
+                    padding: 10px;
+                    border-radius: 20px;
+                    flex-wrap: wrap;
+
+                    .textBkgnd {
+                        display: flex;
+                        background-color: rgb(229, 227, 227);
+                        padding: 4px;
+                        border-radius: 10px;
+                        flex-wrap: wrap;
+                    }
+                }
+
+                .preferences {
+                    text-align: left;
+                    background-color: rgb(210, 197, 196);
+                    padding: 10px;
+                    border-radius: 20px;
+
+                    .preferredItem {
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        gap: 3px;
+                        overflow: scroll;
+                        flex-wrap: wrap;
+
+                        button {
+                            background-color: rgb(242, 235, 235);
+                        }
+                    }
+                }
+            }
+        }
 }

@@ -1,29 +1,34 @@
 .rightNavColumn {
     display: flex;
     flex-direction: column;
-    padding-left: 40px;
-    padding-right: 60px;
-    width: 10vw;
 
     .upcomingEvents {
         text-align: left;
+        margin-bottom: 5vh;
     }
+    
     .upcomingEventInfo {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
         background-color: #d0c2c2;
         padding: 10px;
         border-radius: 30px;
+        flex-wrap: wrap;
         overflow: scroll;
 
         .artistInfo {
             display: flex;
             flex-direction: row;
             align-items: center;
+            flex-wrap: wrap;
             gap: 10px;
             padding-bottom: 10px;
+
+            .artistInfoText {
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: column;
+            }
 
             img {
                 width: 40px;
@@ -31,56 +36,50 @@
                 border-radius: 100px;
             }
 
-            .artistInfoText {
-                line-height: 0;
-
-                .date {
-                    font-size: small;
-                };
-            };
+            .date {
+                font-size: small;
+            }
         };
     };
+
     .suggestions{
         text-align: left;
 
         .suggestionsBox {
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
             background-color: #d0c2c2;
             padding: 10px;
             border-radius: 30px;
+            flex-wrap: wrap;
             overflow: scroll;
 
 
-        .artistInfo {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 10px;
-            padding-bottom: 10px;
+            .artistInfo {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 10px;
+                padding-bottom: 10px;
+                flex-wrap: wrap;
 
-            img {
-                width: 40px;
-                height: 40px;
-                border-radius: 100px;
-            };
+                img {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 100px;
+                };
 
-            .artistInfoText {
-                line-height: 0;
-                text-align: left;
+                .artistInfoText {
+                    display: flex;
+                    flex-wrap: wrap;
+                    flex-direction: column;
+                }
 
                 .userName {
                     font-size: small;
-                    };
-                };
-            };
-        }; 
-    };
-    .logo {
-        width: 100px;
-        height: 30px;
-        border-radius: 100px;
+                }
+            }; 
+        };
     };
 };
+

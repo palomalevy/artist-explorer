@@ -1,11 +1,10 @@
 .discoverColumn {
     display: flex;
     flex-direction: column;
-    width: 30vw;
-    padding-bottom: 30px;
-    margin-top: 30px;
-    height: 80%;
     text-align: left;
+    width: 40vw;
+    height: 90vh;
+
     
     .userPosts {
         overflow: scroll;
@@ -17,21 +16,20 @@
         background-color: #d0c2c2;
         border-radius: 30px;
         margin-bottom: 3%;
+        flex-wrap: wrap;
+        padding-left: 2vw;
+        padding-right: 2vw;
 
         .postHeader {
             display: flex;
             flex-direction: row;
-            gap: 62%;
-            justify-content: center;
             padding-top: 20px;
+            gap: 8px;
 
-            .postHeaderLeft {
-                line-height: 0;
-                text-align: left;
+            .headerRowLeft {
                 display: flex;
                 flex-direction: row;
                 align-items: center;
-                gap: 10px;
 
                 .postPfp {
                     width: 30px;
@@ -40,23 +38,21 @@
                 }
             }
 
-            .postHeaderRight {
-                padding-top: 20px;
-            }
             .username {
                 font-size: x-small;
             }
         }
         .postDescription {
+            display: flex;
+            flex-wrap: wrap;
             text-align: left;
-            width: 500px;
-            padding-left: 30px;
         }
         .postImages {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 10px;
+            flex-wrap: wrap;
 
             img {
                 width: 150px;
