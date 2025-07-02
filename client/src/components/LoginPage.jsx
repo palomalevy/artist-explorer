@@ -55,28 +55,30 @@ const LoginPage = () => {
     };
 
   return (
-    <section className="loginPage">
-        <p>Pulse Logo Here</p>
-        <h1>Pulse</h1>
-        <section className="loginForm">
-            <form onSubmit={handleSubmit}>
-                <div className="loginContainer">
-                    <div className="credentials">
-                        <div className="userName">
-                            <label className="identifier"><b>Email or username</b></label>
-                            <input type="text" placeholder="Email or username" name="identifier" value={identifier} onChange={handleIdentifierChange} required/>
+    <section className="loginBox">
+        <section className="loginPage">
+            <p>Pulse Logo Here</p>
+            <h1>Pulse</h1>
+            <section className="loginForm">
+                <form onSubmit={handleSubmit}>
+                    <div className="loginContainer">
+                        <div className="credentials">
+                            <div className="usernameInput">
+                                <label className="identifier"><b>Email or username</b></label>
+                                <input type="text" placeholder="Email or username" name="identifier" value={identifier} onChange={handleIdentifierChange} required/>
+                            </div>
+                            <div className="passwordInput">
+                                <label className="password"><b>Password</b></label>
+                                <input type="password" placeholder="Password" name="password" value={password} onChange={handlePasswordChange} required/>
+                            </div>
                         </div>
-                        <div className="passWord">
-                            <label className="password"><b>Password</b></label>
-                            <input type="password" placeholder="Password" name="password" value={password} onChange={handlePasswordChange} required/>
-                        </div>
+                        {error && <p style={{ color: 'red' }}>{error}</p>}
+                        <button className="loginButton" type="submit"><Link to="/"></Link>Login</button>
                     </div>
-                    {error && <p style={{ color: 'red' }}>{error}</p>}
-                    <button className="loginButton" type="submit"><Link to="/"></Link>Login</button>
-                </div>
-            </form> 
+                </form> 
+            </section>
+            <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
         </section>
-        <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
     </section>
   );
 };

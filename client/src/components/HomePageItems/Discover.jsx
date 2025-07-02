@@ -8,7 +8,6 @@ const Discover = () => {
         <section className="userPosts">
           <DiscoverPost />
         </section>
-        
     </div>
     
   )

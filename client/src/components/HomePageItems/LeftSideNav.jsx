@@ -20,13 +20,8 @@ const LeftSideNav = () => {
                 <Link to={`/profile`}>
                      <button>Settings</button>
                 </Link>
-            </section>
-            <section className="createNew">
-                <button className="createButton">New</button>
-                <div className="connect">
-                    <button className="createButton">Spotify</button>
-                    <button className="createButton">SC</button>
-                </div>
+                <button className="createButton">New ???</button>
+                <button className="createButton">SC ???</button>
             </section>
         </section>
     </>

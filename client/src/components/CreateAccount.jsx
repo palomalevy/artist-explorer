@@ -72,42 +72,43 @@ const CreateAccount = () => {
       };
 
   return (
-    <section className="createAccount">
-        <h1> Create Account</h1>
-        <section className="signupForm">
-                    <form onSubmit={handleSubmit}>
-                        <div className="signupContainer">
-                            <div className="credentials">
-                                <div className="newName">
-                                    <label className="name">Name</label>
-                                    <input type="text" placeholder="Full Name" name="name" value={name} onChange={handleNameChange} required/>
+    <section className="createAccountContainer">
+        <section className="createAccount">
+            <h1> Create Account</h1>
+            <section className="signupForm">
+                        <form onSubmit={handleSubmit}>
+                            <div className="signupContainer">
+                                <div className="credentials">
+                                    <div className="newName">
+                                        <label className="name">Name</label>
+                                        <input type="text" placeholder="Full Name" name="name" value={name} onChange={handleNameChange} required/>
+                                    </div>
+                                    <div className="newEmail">
+                                        <label className="email">Email</label>
+                                        <input type="text" placeholder="Email" name="email" value={email} onChange={handleEmailChange} required/>
+                                    </div>
+                                    <div className="newUsername">
+                                        <label className="username">Username</label>
+                                        <input type="text" placeholder="Username" name="username" value={username} onChange={handleUsernameChange} required/>
+                                    </div>
+                                    <div className="passwordNew">
+                                        <label className="password">Password</label>
+                                        <input type="password" placeholder="Password" name="password" value={password} onChange={handlePasswordChange} required/>
+                                    </div>
+                                    <div className="zipcodeNew">
+                                        <label className="zipcode">Zipcode</label>
+                                        <input type="password" placeholder="Zipcode" name="zipcode" value={zipcode} onChange={handleZipcodeChange} required/>
+                                    </div>
                                 </div>
-                                <div className="newEmail">
-                                    <label className="email">Email</label>
-                                    <input type="text" placeholder="Email" name="email" value={email} onChange={handleEmailChange} required/>
-                                </div>
-                                <div className="newUsername">
-                                    <label className="username">Username</label>
-                                    <input type="text" placeholder="Username" name="username" value={username} onChange={handleUsernameChange} required/>
-                                </div>
-                                <div className="passwordNew">
-                                    <label className="password">Password</label>
-                                    <input type="password" placeholder="Password" name="password" value={password} onChange={handlePasswordChange} required/>
-                                </div>
-                                <div className="zipcodeNew">
-                                    <label className="zipcode">Zipcode</label>
-                                    <input type="password" placeholder="Zipcode" name="zipcode" value={zipcode} onChange={handleZipcodeChange} required/>
-                                </div>
+                                {error && <p style={{ color: 'red' }}>{error}</p>}
+                                <button className="signupButton" type="submit"><Link to="/"></Link>Sign Up</button>
                             </div>
-                            {error && <p style={{ color: 'red' }}>{error}</p>}
-                            <button className="signupButton" type="submit"><Link to="/"></Link>Sign Up</button>
-                        </div>
-                    </form> 
-          </section>
-          <p>Already have an account? <Link to="/login">Login</Link></p>
+                        </form> 
+            </section>
+            <p>Already have an account? <Link to="/login">Login</Link></p>
+        </section>
     </section>
-    
   )
-}
+};
 
 export default CreateAccount;
