@@ -3,7 +3,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 6vw;
-  background-color: white;
+  background-color: #bfa3a3;
   color: black;
   border-radius: 40px;
   margin: 2vh 6vw;
@@ -19,3 +19,15 @@ footer {
   margin: 0;
 }
 
+button {
+  border-radius: 8px;
+  border: 1px transparent;
+  background-color: #d0c2c2;
+  transition: border-color 0.25s;
+  padding: 5px;
+}
+button:hover {
+  cursor: pointer;
+  background-color: #bfa3a3;
+  transform: scale(1.05);
+}

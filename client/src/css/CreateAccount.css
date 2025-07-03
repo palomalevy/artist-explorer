@@ -29,7 +29,6 @@ input {
     background-color: rgb(235, 230, 230);
     border-radius: 15px;
     padding: 5px;
-    color: black;
 }
 
 .signupContainer {
@@ -59,11 +58,11 @@ input {
             display: flex;
             flex-direction: column;
         }
-        .passwordNew {
+        .newPassword {
             display: flex;
             flex-direction: column;
         }
-        .zipcodeNew {
+        .newZipcode {
             display: flex;
             flex-direction: column;
         }

@@ -2,26 +2,23 @@ import React from 'react'
 import {data} from '../../temp-data/temp-data';
 import { Link } from 'react-router-dom';
 
-const LeftSideNav = () => {
+const LeftSideNav = ({user}) => {
   return (
     <>
         <section className="leftNavColumn">
             <div>LeftSideNav</div>
             <section className="mainPfp">
-                <img src={data[0].user.pfp} alt="userPfp" />
+                <Link to={`/profile/${user.id}`}><img src={`https://picsum.photos/200?random=${user.id}`} alt="userPfp"/></Link>
                 <div className="userInfo">
-                    <h3>{data[0].user.name}</h3>
-                    <p>{data[0].user.username}</p>
+                    <h3>{user.name}</h3>
+                    <p>{user.username}</p>
                 </div>
             </section>
             <section className="navButtons">
                 <button>Discover</button>
                 <button>Following</button>
-                <Link to={`/profile`}>
-                     <button>Settings</button>
-                </Link>
-                <button className="createButton">New ???</button>
-                <button className="createButton">SC ???</button>
+                <button>My Posts</button>
+                <Link to={`/profile/${user.id}`}><button>Settings</button></Link>
             </section>
         </section>
     </>

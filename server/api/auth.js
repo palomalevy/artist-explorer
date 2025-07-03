@@ -1,6 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const { PrismaClient } = require('@prisma/client');
+const { PrismaClient } = require('../generated/prisma')
 
 const prisma = new PrismaClient();
 const auth = express.Router()
@@ -39,7 +39,8 @@ auth.post('/signup', async (req, res) => {
         } catch (error) {
         res.send({ message: 'An error occurred during sign up.' });
         }
-})
+});
+
 // [POST] login
 auth.post('/login', async (req, res) => {
     const { identifier, password} = req.body
@@ -67,13 +68,12 @@ auth.post('/login', async (req, res) => {
             req.session.userID = user.id
             req.session.username = user.username
         
-            res.send({ message: 'user auth successful' })
+            res.send({ userID : user.id, message: 'user auth successful' })
 
     } catch (error) {
-        console.error(error)
         res.status(500).json({ error: "Something went wrong during login" })
     }
-})
+});
 
 // [GET] sessions
 auth.get('/me', async (req, res) => {
@@ -89,7 +89,6 @@ auth.get('/me', async (req, res) => {
 
         res.json({id: req.session.userID, username: user.username})
     } catch (error) {
-        console.error(error)
         res.status(500).json({error: "Error fetching user data."})
     }
 })

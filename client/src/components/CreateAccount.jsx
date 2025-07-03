@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router'
 import { useNavigate } from 'react-router'
 import LoginPage from './LoginPage'
+import WithAuth from './WithAuth'
 
-const CreateAccount = () => {
+const CreateAccount = ({userID}) => {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -67,8 +68,9 @@ const CreateAccount = () => {
         .then((response) => response.json())
         .then((userData) => {
             setUserData(userData)
+            navigate(`/${userID}`)
         })
-        .catch((error) => console.error(error));
+        .catch(error);
       };
 
   return (
@@ -91,17 +93,17 @@ const CreateAccount = () => {
                                         <label className="username">Username</label>
                                         <input type="text" placeholder="Username" name="username" value={username} onChange={handleUsernameChange} required/>
                                     </div>
-                                    <div className="passwordNew">
+                                    <div className="newPassword">
                                         <label className="password">Password</label>
                                         <input type="password" placeholder="Password" name="password" value={password} onChange={handlePasswordChange} required/>
                                     </div>
-                                    <div className="zipcodeNew">
+                                    <div className="newZipcode">
                                         <label className="zipcode">Zipcode</label>
-                                        <input type="password" placeholder="Zipcode" name="zipcode" value={zipcode} onChange={handleZipcodeChange} required/>
+                                        <input type="number" placeholder="Zipcode" name="zipcode" value={zipcode} onChange={handleZipcodeChange} required/>
                                     </div>
                                 </div>
                                 {error && <p style={{ color: 'red' }}>{error}</p>}
-                                <button className="signupButton" type="submit"><Link to="/"></Link>Sign Up</button>
+                                <button className="signupButton" type="submit">Sign Up</button>
                             </div>
                         </form> 
             </section>
@@ -111,4 +113,4 @@ const CreateAccount = () => {
   )
 };
 
-export default CreateAccount;
+export default WithAuth(CreateAccount);

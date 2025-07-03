@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useParams } from 'react-router-dom';
 import reactLogo from './assets/react.svg'
 import './App.css'
 import HomePage from './components/HomePage'
@@ -16,14 +16,15 @@ import ProfilePage from './components/ProfilePage';
 import WithAuth from './components/WithAuth';
 
 function App() {
+  const { userID } = useParams()
 
   return (
     <>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/:userID" element={<HomePage />} />
+        <Route path="/profile/:userID" element={<ProfilePage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<CreateAccount />} />
+        <Route path="/signup" element={<CreateAccount userID={userID}/>} />
       </Routes>
 
       <footer>Pulse 2025 | Created by Paloma Levy</footer>
