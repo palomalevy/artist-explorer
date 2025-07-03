@@ -1,40 +1,55 @@
-import React from 'react'
-import {data} from '../temp-data/temp-data';
+import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router';
 import WithAuth from './WithAuth'
 import Logout from './HomePageItems/Logout';
+import { Link } from 'react-router-dom';
 
 const ProfilePage = () => {
-  return (
+    const { userID } = useParams()
+    const [user, setUser] = useState({})
+    const baseURL = import.meta.env.VITE_BASE_URL
+
+    const fetchUserData = async () => {
+        const resData = await fetch(`${baseURL}/api/me/${userID}`);
+        const data = await resData.json();
+        setUser(data);
+    }
+
+    useEffect(() => {
+        fetchUserData();
+    }, [userID]);
+
+    return (
     <section className="profileContainer">
         <section className="profilePage">
-            <div>ProfilePage</div>
             <section className="mainPfp">
-                <img src={data[0].user.pfp} alt="userPfp" />
+                <Link to={`/${user.id}`}>
+                    <img src={`https://picsum.photos/200?random=${userID}`} alt="imageURL" />
+                </Link>
                 <div className="userInfo">
-                    <h3>{data[0].user.name}</h3>
-                    <p>{data[0].user.username}</p>
-                </div>
+                    <h3>{user.name}</h3>
+                    <p>@{user.username}</p>
+                    </div>
             </section>
-            
             <div className="leftRight">
                 <section className="profileInfo">
                     <h3>Profile Information</h3>
                     <section className="allInfo">
                         <article className="userName">
                             <p>Username</p>
-                            <p className="textBkgnd">{data[0].user.username}</p>
+                            <p className="textBkgnd">{user.username}</p>
                         </article>
                         <article className="Email">
                             <p>Email</p>
-                            <p className="textBkgnd">example@youremailjnfoenif.com</p>
+                            <p className="textBkgnd">{user.email}</p>
                         </article>
                         <article className="password">
                             <p>Password</p>
-                            <p className="textBkgnd">{data[0].user.password}</p>
+                            <p className="textBkgnd">{user.password}</p>
                         </article>
                         <article className="zipCode">
                             <p>Zip Code</p>
-                            <p className="textBkgnd">{data[0].user.zipcode}</p>
+                            <p className="textBkgnd">{user.zipcode}</p>
                         </article>
                     </section>
                 </section>

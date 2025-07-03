@@ -8,6 +8,9 @@ const Discover = () => {
         <section className="userPosts">
           <DiscoverPost />
         </section>
+        <section className="newButtons">
+          <button className="createButton">+ Create a Post</button>
+        </section>
     </div>
     
   )

@@ -6,5 +6,5 @@ const Post = require('./cards-prisma')
 server.use(express.json())
 server.use(cors())
 
-const { PrismaClient } = require('@prisma/client');
+const { PrismaClient } = require('../generated/prisma')
 const prisma = new PrismaClient();

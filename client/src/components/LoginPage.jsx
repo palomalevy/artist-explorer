@@ -37,9 +37,10 @@ const LoginPage = () => {
         
         if (res.ok) {
                 const data = await res.json();
-                
+                const userID = data.userID
+
                 if (data.message === "user auth successful") {
-                    navigate('/')
+                    navigate(`/${userID}`)
                 } else if (data.message === "wrong username/email") {
                     setError('Invalid username/email.')
                 } else if (data.message === "wrong password") {
@@ -50,7 +51,6 @@ const LoginPage = () => {
             }   
         } catch (err) {
             setError('An error ocurred during login.')
-            console.error('Login error:', err)
         }
     };
 
@@ -73,7 +73,7 @@ const LoginPage = () => {
                             </div>
                         </div>
                         {error && <p style={{ color: 'red' }}>{error}</p>}
-                        <button className="loginButton" type="submit"><Link to="/"></Link>Login</button>
+                        <button className="loginButton" type="submit">Login</button>
                     </div>
                 </form> 
             </section>
