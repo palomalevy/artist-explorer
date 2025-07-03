@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router'
 import { useNavigate } from 'react-router'
-import LoginPage from './LoginPage'
-import WithAuth from './WithAuth'
 
-const CreateAccount = ({userID}) => {
+const CreateAccount = () => {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -48,7 +46,7 @@ const CreateAccount = ({userID}) => {
         setZipcode(value)
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         setError('');
 
@@ -60,18 +58,39 @@ const CreateAccount = ({userID}) => {
           zipcode: parseInt(event.target.zipcode.value),
         }
 
-        fetch(`${baseURL}/api/auth/signup`, {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(newUser),
-        })
-        .then((response) => response.json())
-        .then((userData) => {
-            setUserData(userData)
-            navigate(`/${userID}`)
-        })
-        .catch(error);
-      };
+        try{
+            const res = await fetch(`${baseURL}/api/auth/signup`, {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                credentials: 'include',
+                body: JSON.stringify(newUser),
+            });
+
+            if (res.ok) {
+                const data = await res.json();
+
+                if (data.message === "user auth successful") {
+                    setUserData(data)
+                    navigate(`/home`)
+                } else if (data.message === "Username already taken!") {
+                        setError('Username already taken!')
+                } else if (data.message === "Email already taken!") {
+                        setError(data.message)
+                } else if (data.message === "Password must be at least 8 characters long!") {
+                        setError(data.message)
+                } else {
+                    const errorData = await res.json();
+                    ServerRouter(errorData.message || 'Signup failed.')
+                }
+            } else {
+                const errorData = await res.json();
+                ServerRouter(errorData.message || 'Login failed.')
+            }
+
+        } catch(err) {
+            setError('An error ocurred during login.')
+        }
+    }
 
   return (
     <section className="createAccountContainer">
@@ -113,4 +132,4 @@ const CreateAccount = ({userID}) => {
   )
 };
 
-export default WithAuth(CreateAccount);
+export default CreateAccount;

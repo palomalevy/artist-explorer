@@ -1,13 +1,13 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const { PrismaClient } = require('../generated/prisma')
+const { PrismaClient } = require('@prisma/client')
 
 const prisma = new PrismaClient();
 const auth = express.Router()
 
 // [POST]signup
 auth.post('/signup', async (req, res) => {
-    const {name, username, password, email, zipcode, genres} = req.body
+    const {name, username, password, email, zipcode } = req.body
     const hash = await bcrypt.hash(password, 13)
 
     try {
@@ -26,7 +26,7 @@ auth.post('/signup', async (req, res) => {
         if (!passwordLengthValid) {
             return res.send({ message: 'Password must be at least 8 characters long!' });
         }
-        await prisma.user.create({
+        const user = await prisma.user.create({
             data: {
             name,
             username,
@@ -35,7 +35,12 @@ auth.post('/signup', async (req, res) => {
             zipcode,
             },
         });
-        res.send({ message: 'Sign up successful!' });
+
+        req.session.userID = user.id
+        req.session.username = user.username
+
+        res.send({ userID : user.id, message: 'user auth successful' })
+
         } catch (error) {
         res.send({ message: 'An error occurred during sign up.' });
         }

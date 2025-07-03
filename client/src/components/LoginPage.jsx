@@ -40,7 +40,7 @@ const LoginPage = () => {
                 const userID = data.userID
 
                 if (data.message === "user auth successful") {
-                    navigate(`/${userID}`)
+                    navigate(`/home`)
                 } else if (data.message === "wrong username/email") {
                     setError('Invalid username/email.')
                 } else if (data.message === "wrong password") {

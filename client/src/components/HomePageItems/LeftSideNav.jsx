@@ -8,7 +8,7 @@ const LeftSideNav = ({user}) => {
         <section className="leftNavColumn">
             <div>LeftSideNav</div>
             <section className="mainPfp">
-                <Link to={`/profile/${user.id}`}><img src={`https://picsum.photos/200?random=${user.id}`} alt="userPfp"/></Link>
+                <Link to={`/profile`}><img src={`https://picsum.photos/200?random=${user.id}`} alt="userPfp"/></Link>
                 <div className="userInfo">
                     <h3>{user.name}</h3>
                     <p>{user.username}</p>
@@ -18,7 +18,7 @@ const LeftSideNav = ({user}) => {
                 <button>Discover</button>
                 <button>Following</button>
                 <button>My Posts</button>
-                <Link to={`/profile/${user.id}`}><button>Settings</button></Link>
+                <Link to={`/profile`}><button>Settings</button></Link>
             </section>
         </section>
     </>

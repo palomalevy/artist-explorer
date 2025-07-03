@@ -17,11 +17,9 @@ const Logout = () => {
             if (response.ok) {
                 setUser(null);
                 navigate('/login');
-            } else {
-                console.error('Failed to log out.')
             }
         } catch (error) {
-            console.error('Network error. Please try again.', error)
+            res.send({ message: 'An error occurred during logout.' });
         }
     };
 
