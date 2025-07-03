@@ -6,12 +6,13 @@ const app = express()
 const PORT = process.env.PORT || 3000 
 
 const auth = require('./api/auth')
-const routes = require('./api/users')
+const user = require('./api/users')
+const posts = require('./api/posts')
 
 const { ValidationError } = require('./middleware/CustomErrors')
 
 app.use(cors({
-  origin: 'http://localhost:5174', // Replace with your frontend's origin
+  origin: 'http://localhost:5173',
   credentials: true
 }))
 
@@ -25,14 +26,13 @@ app.use(session({
 }))
 
 app.use('/api/auth', auth)
-app.use('/api', routes)
+app.use('/api/user', user)
+app.use('/api/posts', posts)
 
 app.use((err, req, res, next) => {
     if (err instanceof ValidationError) {
       return res.status(err.statusCode).json({ error: err.message })
     }
-
-    // Additional Prisma error checks can be placed here
     res.status(500).json({ error: "Internal Server Error" })
 })  
 

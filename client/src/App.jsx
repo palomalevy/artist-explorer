@@ -21,8 +21,8 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/:userID" element={<HomePage />} />
-        <Route path="/profile/:userID" element={<ProfilePage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<CreateAccount userID={userID}/>} />
       </Routes>

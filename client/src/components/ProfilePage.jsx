@@ -3,28 +3,36 @@ import { useParams } from 'react-router';
 import WithAuth from './WithAuth'
 import Logout from './HomePageItems/Logout';
 import { Link } from 'react-router-dom';
+import { useUser } from "../contexts/UserContext";
 
 const ProfilePage = () => {
-    const { userID } = useParams()
-    const [user, setUser] = useState({})
+    const { user, setUser } = useUser();
     const baseURL = import.meta.env.VITE_BASE_URL
 
     const fetchUserData = async () => {
-        const resData = await fetch(`${baseURL}/api/me/${userID}`);
-        const data = await resData.json();
-        setUser(data);
-    }
+        const resData = await fetch(`${baseURL}/api/user/userInfo`, {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            credentials: 'include',
+            body: JSON.stringify({
+                userID: user.id
+            }),
+          });
+          
+          const data = await resData.json();
+          setUser(data);
+      }
 
     useEffect(() => {
         fetchUserData();
-    }, [userID]);
+    }, [user.id]);
 
     return (
     <section className="profileContainer">
         <section className="profilePage">
             <section className="mainPfp">
-                <Link to={`/${user.id}`}>
-                    <img src={`https://picsum.photos/200?random=${userID}`} alt="imageURL" />
+                <Link to={`/home`}>
+                    <img src={`https://picsum.photos/200?random=${user.id}`} alt="imageURL" />
                 </Link>
                 <div className="userInfo">
                     <h3>{user.name}</h3>
@@ -42,10 +50,6 @@ const ProfilePage = () => {
                         <article className="Email">
                             <p>Email</p>
                             <p className="textBkgnd">{user.email}</p>
-                        </article>
-                        <article className="password">
-                            <p>Password</p>
-                            <p className="textBkgnd">{user.password}</p>
                         </article>
                         <article className="zipCode">
                             <p>Zip Code</p>
