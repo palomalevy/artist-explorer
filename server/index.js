@@ -6,6 +6,7 @@ const app = express()
 const PORT = process.env.PORT || 3000 
 
 const auth = require('./api/auth')
+const routes = require('./api/users')
 
 const { ValidationError } = require('./middleware/CustomErrors')
 
@@ -24,6 +25,7 @@ app.use(session({
 }))
 
 app.use('/api/auth', auth)
+app.use('/api', routes)
 
 app.use((err, req, res, next) => {
     if (err instanceof ValidationError) {

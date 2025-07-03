@@ -5,8 +5,15 @@
     width: 40vw;
     height: 90vh;
 
+    .newButtons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 5px;
+    }
     
     .userPosts {
+        max-height: 80vh;
         overflow: scroll;
     }
 
