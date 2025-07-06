@@ -11,6 +11,7 @@ import '../src/css/LoginPage.css'
 import '../src/css/ProfilePage.css'
 import './index.css'
 import '../src/css/CreateAccount.css'
+import '../src/css/PopupModal.css'
 import CreateAccount from './components/CreateAccount';
 import ProfilePage from './components/ProfilePage';
 import WithAuth from './components/WithAuth';

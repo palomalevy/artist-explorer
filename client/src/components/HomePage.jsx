@@ -33,7 +33,7 @@ const HomePage = () => {
         <div>Pulse Home</div>
         <section className="container">
             <LeftSideNav user={user}/>
-            <Discover />
+            <Discover user={user}/>
             <RightSideNav />
         </section>
     </section>

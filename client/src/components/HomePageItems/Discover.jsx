@@ -1,7 +1,18 @@
-import React from 'react'
+import React, {useState} from 'react'
 import DiscoverPost from './DiscoverPost'
+import CreatePost from './CreatePost';
 
-const Discover = () => {
+const Discover = ({user}) => {
+  const [showModal, setShowModal] = useState(false)
+
+  const openPopup = () => {
+        setShowModal(true)
+    }
+
+    const closePopup = () => {
+        setShowModal(false)
+    }
+
   return (
     <div className="discoverColumn">
         <h2>Discover</h2>
@@ -9,8 +20,9 @@ const Discover = () => {
           <DiscoverPost />
         </section>
         <section className="newButtons">
-          <button className="createButton">+ Create a Post</button>
+          <button onClick={openPopup} className="createPostButton">+ Create Post</button>
         </section>
+        <CreatePost showModal={showModal} setShowModal={setShowModal} closePopup={closePopup} user={user}/>
     </div>
     
   )
