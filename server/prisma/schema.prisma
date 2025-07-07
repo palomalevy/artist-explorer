@@ -30,7 +30,7 @@ model Post {
   zipcode    Int
   caption    String
   follow     Boolean @default(false)
-  postImages String?
+  postImages String[] @default([])
   musicURL   String?
 }
 

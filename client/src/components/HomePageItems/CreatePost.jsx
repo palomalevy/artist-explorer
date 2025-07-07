@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
+import PostImages from './PostImages';
 
-const CreatePost = ({showModal, setShowModal, closePopup, user}) => {
-    const [posts, setPosts] = useState([]);
+const CreatePost = ({showModal, setShowModal, closePopup, user, setPosts}) => {
     const [title, setTitle] = useState('');
     const [zipcode, setZipcode] = useState('');
     const [caption, setCaption] = useState('');
-    const [postImages, setPostImages] = useState('');
+    const [postImages, setPostImages] = useState(['']);
     const [musicURL, setMusicURL] = useState('');
     const [error, setError] = useState('')
     const [follow, setFollow] = useState(false)
@@ -27,11 +27,6 @@ const CreatePost = ({showModal, setShowModal, closePopup, user}) => {
         setCaption(value)
     }
 
-    const handlePostImagesChange = (event) => {
-        const value = event.target.value;
-        setPostImages(value);
-    }
-
     const handleMusicURLChange = (event) => {
         const value = event.target.value;
         setMusicURL(value);
@@ -46,7 +41,7 @@ const CreatePost = ({showModal, setShowModal, closePopup, user}) => {
             title: event.target.title.value,
             caption: event.target.caption.value,
             zipcode: parseInt(event.target.zipcode.value),
-            postImages: event.target.postImages.value,
+            postImages: Array.isArray(postImages) ? postImages.filter(img => img.trim() !== '') : [],
             musicURL: event.target.musicURL.value,
         }
 
@@ -57,14 +52,13 @@ const CreatePost = ({showModal, setShowModal, closePopup, user}) => {
                 credentials: 'include',
                 body: JSON.stringify(newPost),
             })
-
+            
             if (postRes.ok) {
                 const newPost = await postRes.json()
                 setPosts((prevPosts) => {
                     const safePrev = Array.isArray(prevPosts) ? prevPosts : [];
                     return [...safePrev, newPost];
                 })
-
                 setTitle("");
                 setCaption("");
                 setZipcode('');
@@ -74,6 +68,7 @@ const CreatePost = ({showModal, setShowModal, closePopup, user}) => {
             }
             
         } catch(err) {
+            console.error(error);
             setError('Failed to create a new post.')
         }
     };
@@ -93,9 +88,7 @@ const CreatePost = ({showModal, setShowModal, closePopup, user}) => {
                 <label>
                     Zipcode: <input type="number" name="zipcode" value={zipcode} onChange={handleZipcodeChange} />
                 </label>
-                <label>
-                    Image URL: <input type="text" name="postImages" value={postImages} onChange={handlePostImagesChange}/>
-                </label>
+                <PostImages postImages={postImages} setPostImages={setPostImages}/>
                 <label>
                     Music URL: <input type="text" name="musicURL" value={musicURL} onChange={handleMusicURLChange} />
                 </label>
