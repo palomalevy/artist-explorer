@@ -7,6 +7,7 @@ const CreatePost = ({showModal, setShowModal, closePopup, user, setPosts}) => {
     const [caption, setCaption] = useState('');
     const [postImages, setPostImages] = useState(['']);
     const [musicURL, setMusicURL] = useState('');
+    const [postGenre, setPostGenre] = useState('')
     const [error, setError] = useState('')
     const [follow, setFollow] = useState(false)
     const baseURL = import.meta.env.VITE_BASE_URL
@@ -32,6 +33,11 @@ const CreatePost = ({showModal, setShowModal, closePopup, user, setPosts}) => {
         setMusicURL(value);
     }
 
+    const handlePostGenreChange = (event) => {
+        const value = event.target.value;
+        setPostGenre(value);
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         setError('');
@@ -43,6 +49,7 @@ const CreatePost = ({showModal, setShowModal, closePopup, user, setPosts}) => {
             zipcode: parseInt(event.target.zipcode.value),
             postImages: Array.isArray(postImages) ? postImages.filter(img => img.trim() !== '') : [],
             musicURL: event.target.musicURL.value,
+            postGenre: event.target.postGenre.value,
         }
 
         try {
@@ -60,15 +67,16 @@ const CreatePost = ({showModal, setShowModal, closePopup, user, setPosts}) => {
                     return [...safePrev, newPost];
                 })
                 setTitle("");
-                setCaption("");
+                setCaption('');
                 setZipcode('');
                 setPostImages("");
+                setPostGenre('');
                 setMusicURL("");
                 closePopup();
             }
             
         } catch(err) {
-            console.error(error);
+            console.error(err)
             setError('Failed to create a new post.')
         }
     };
@@ -83,10 +91,13 @@ const CreatePost = ({showModal, setShowModal, closePopup, user, setPosts}) => {
                     Title: <input type="text" name="title" value={title} onChange={handleTitleChange} required/>
                 </label>
                 <label>
-                    Caption: <textarea name="caption" onChange={handleCaptionChange}/>
+                    Caption: <textarea name="caption" value={caption} onChange={handleCaptionChange}/>
                 </label>
                 <label>
                     Zipcode: <input type="number" name="zipcode" value={zipcode} onChange={handleZipcodeChange} />
+                </label>
+                <label>
+                    Post Genre: <input name="postGenre" value={postGenre} onChange={handlePostGenreChange} />
                 </label>
                 <PostImages postImages={postImages} setPostImages={setPostImages}/>
                 <label>

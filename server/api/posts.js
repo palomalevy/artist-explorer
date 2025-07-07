@@ -5,9 +5,12 @@ const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient();
 const posts = express.Router()
 
+function sortBy() {
+
+}
 // [POST] create a new post
 posts.post('/createPosts', async (req, res) => {
-    const { title, zipcode, caption, follow, postImages = [], musicURL, userID } = req.body
+    const { title, zipcode, caption, follow, postImages = [], musicURL, userID, postGenre } = req.body
     try {
         const postData = await prisma.post.create({
             data: {
@@ -18,6 +21,7 @@ posts.post('/createPosts', async (req, res) => {
                 follow,
                 authorId: userID,
                 postImages,
+                postGenre,
             },
             include: {
                 author: true,
@@ -27,7 +31,7 @@ posts.post('/createPosts', async (req, res) => {
         res.json(postData);
     } 
     catch (error) {
-        console.error('Error creating post:', error);
+        console.error(error)
         res.status(500).json({ message: `Internal Server Error: ${error}` });
     }
 });
@@ -42,7 +46,6 @@ posts.get('/postInfo', async (req, res) => {
     res.json(posts);
 
   } catch (error) {
-    console.error('Error fetching posts:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });

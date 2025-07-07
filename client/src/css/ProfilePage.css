@@ -11,18 +11,16 @@
   flex-direction: column;
   padding: 30px;
   border-radius: 30px;
-  justify-content: center;
-  align-items: center;
   margin: 1vh 6vw;
   flex-wrap: wrap;
 
     .mainPfp {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        flex-direction: column;
         padding-bottom: 10px;
-        text-align: center;
+        text-align: left;
         flex-wrap: wrap;
 
         img {
@@ -74,6 +72,12 @@
                 }
             }
         }
+    }
+
+    .logoutButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
 

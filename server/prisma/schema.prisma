@@ -18,6 +18,31 @@ model User {
   updatedAt    DateTime @updatedAt
   imageURL     String?
   posts        Post[]
+  genres       Genre[] @default([POP, CLASSICAL, LATIN, HOUSE, COUNTRY, HIPHOP, JAZZ, ROCK, DISCO, EDM, BLUES, LOFI])
+  eventType    Event[] @default([CONCERT, FESTIVAL, NIGHTCLUB, SPEAKEASY])
+}
+
+enum Genre {
+  POP
+  CLASSICAL
+  LATIN
+  HOUSE
+  COUNTRY
+  HIPHOP
+  JAZZ
+  ROCK
+  DISCO
+  EDM
+  BLUES
+  LOFI
+}
+
+enum Event {
+  CONCERT
+  FESTIVAL
+  NIGHTCLUB
+  SPEAKEASY
+  BAND
 }
 
 model Post {
@@ -32,6 +57,7 @@ model Post {
   follow     Boolean @default(false)
   postImages String[] @default([])
   musicURL   String?
+  postGenre  String
 }
 
 

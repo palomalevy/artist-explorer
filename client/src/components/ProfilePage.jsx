@@ -19,6 +19,9 @@ const ProfilePage = () => {
             }),
           });
           
+          console.log("this is the user's data: ", user)
+          console.log("this is the user's genre data: ", user.genres)
+
           const data = await resData.json();
           setUser(data);
       }
@@ -30,6 +33,7 @@ const ProfilePage = () => {
     return (
     <section className="profileContainer">
         <section className="profilePage">
+            <Link to={`/home`}><h2 className='backButton'>❮</h2></Link>
             <section className="mainPfp">
                 <Link to={`/home`}>
                     <img src={`https://picsum.photos/200?random=${user.id}`} alt="imageURL" />
@@ -62,9 +66,8 @@ const ProfilePage = () => {
                     <section className="preferences">
                         <p>Genres</p>
                         <article className="preferredItem">
-                            <button>✔ Hip-Hop</button>
-                            <button>✔ Latin</button>
-                            <button>✔ Classical</button>
+                            <p>{user.genres}</p>
+                            {/* <button>✔ Classical</button> */}
                         </article>
                         <p>Events</p>
                         <article className="preferredItem">
