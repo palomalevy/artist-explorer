@@ -4,6 +4,7 @@ import WithAuth from './WithAuth'
 import Logout from './HomePageItems/Logout';
 import { Link } from 'react-router-dom';
 import { useUser } from "../contexts/UserContext";
+import UserGenres from './ProfilePageItems/UserGenres';
 
 const ProfilePage = () => {
     const { user, setUser } = useUser();
@@ -18,9 +19,6 @@ const ProfilePage = () => {
                 userID: user.id
             }),
           });
-          
-          console.log("this is the user's data: ", user)
-          console.log("this is the user's genre data: ", user.genres)
 
           const data = await resData.json();
           setUser(data);
@@ -66,7 +64,7 @@ const ProfilePage = () => {
                     <section className="preferences">
                         <p>Genres</p>
                         <article className="preferredItem">
-                            <p>{user.genres}</p>
+                            <UserGenres user={user}/>
                             {/* <button>✔ Classical</button> */}
                         </article>
                         <p>Events</p>

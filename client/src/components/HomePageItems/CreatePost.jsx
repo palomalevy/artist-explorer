@@ -76,7 +76,6 @@ const CreatePost = ({showModal, setShowModal, closePopup, user, setPosts}) => {
             }
             
         } catch(err) {
-            console.error(err)
             setError('Failed to create a new post.')
         }
     };
