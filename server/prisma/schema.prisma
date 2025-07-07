@@ -28,7 +28,9 @@ model Post {
   author     User     @relation(fields: [authorId], references: [id])
   authorId   Int
   zipcode    Int
-  postImages String?
+  caption    String
+  follow     Boolean @default(false)
+  postImages String[] @default([])
   musicURL   String?
 }
 
