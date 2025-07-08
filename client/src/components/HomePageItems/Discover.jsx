@@ -5,7 +5,8 @@ import CreatePost from './CreatePost';
 const Discover = ({user}) => {
   const [showModal, setShowModal] = useState(false)
   const [posts, setPosts] = useState([]);
-  const baseURL = import.meta.env.VITE_BASE_URL
+  const [error, setError] = useState('');
+  const baseURL = import.meta.env.VITE_BASE_URL;
 
   const openPopup = () => {
         setShowModal(true)
@@ -25,7 +26,7 @@ const Discover = ({user}) => {
 
           setPosts(data);
         } catch (err) {
-          console.error('Error fetching posts:', err);
+          setError('Error fetching posts')
         }
     };
 
