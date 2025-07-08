@@ -5,9 +5,13 @@ import Logout from './HomePageItems/Logout';
 import { Link } from 'react-router-dom';
 import { useUser } from "../contexts/UserContext";
 import UserGenres from './ProfilePageItems/UserGenres';
+import UserEventTypes from './ProfilePageItems/UserEventTypes';
+import EditZipcode from './ProfilePageItems/EditZipcode';
 
 const ProfilePage = () => {
     const { user, setUser } = useUser();
+    const [editing, setEditing] = useState(false);
+    const [isChange, setIsChange] = useState(false);
     const baseURL = import.meta.env.VITE_BASE_URL
 
     const fetchUserData = async () => {
@@ -25,8 +29,15 @@ const ProfilePage = () => {
       }
 
     useEffect(() => {
-        fetchUserData();
-    }, [user.id]);
+        if (isChange) {
+            fetchUserData();
+            setIsChange(false)
+        }
+    }, [isChange]);
+
+    const handleEditButton = () => {
+        setEditing(true);
+    }
 
     return (
     <section className="profileContainer">
@@ -55,7 +66,14 @@ const ProfilePage = () => {
                         </article>
                         <article className="zipCode">
                             <p>Zip Code</p>
-                            <p className="textBkgnd">{user.zipcode}</p>
+                            {editing ? (
+                                <EditZipcode user={user} baseURL={baseURL} setEditing={setEditing} setIsChange={setIsChange}/>
+                            ) : (
+                                <>
+                                    <p className="textBkgnd">{user.zipcode}</p>
+                                    <button className="editZipcode" onClick={handleEditButton}>Edit</button>
+                                </>
+                            )}
                         </article>
                     </section>
                 </section>
@@ -64,14 +82,12 @@ const ProfilePage = () => {
                     <section className="preferences">
                         <p>Genres</p>
                         <article className="preferredItem">
-                            <UserGenres user={user}/>
+                            <UserGenres user={user} baseURL={baseURL} setIsChange={setIsChange} />
                             {/* <button>✔ Classical</button> */}
                         </article>
                         <p>Events</p>
                         <article className="preferredItem">
-                            <button>✔ DJ/Club</button>
-                            <button>✔ Band</button>
-                            <button>✔ Orchestra</button>
+                            <UserEventTypes user={user} baseURL={baseURL} setIsChange={setIsChange} />
                         </article>
                     </section>
                 </section>

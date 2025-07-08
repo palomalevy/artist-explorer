@@ -19,7 +19,7 @@ model User {
   imageURL     String?
   posts        Post[]
   genres       Genre[] @default([POP, CLASSICAL, LATIN, HOUSE, COUNTRY, HIPHOP, JAZZ, ROCK, DISCO, EDM, BLUES, LOFI])
-  eventType    Event[] @default([CONCERT, FESTIVAL, NIGHTCLUB, SPEAKEASY])
+  eventType    Event[] @default([CONCERT, FESTIVAL, NIGHTCLUB, SPEAKEASY, BAND, STUDIO, AWARDS, CLASSES, THEATER])
 }
 
 enum Genre {
@@ -43,6 +43,10 @@ enum Event {
   NIGHTCLUB
   SPEAKEASY
   BAND
+  STUDIO
+  AWARDS
+  CLASSES
+  THEATER
 }
 
 model Post {
