@@ -35,7 +35,6 @@ const UserGenres = ({user, baseURL, setIsChange}) => {
     const saveGenres = async () => {
         // fetch 'PUT' endpoint to update DB when saved
         try {
-            console.log('about to fetch')
             const updatedUserRes = await fetch(`${baseURL}/api/user/genres`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
@@ -43,12 +42,8 @@ const UserGenres = ({user, baseURL, setIsChange}) => {
                 body: JSON.stringify({ genres: selectedGenres }),
             })
 
-            console.log('Genres saved!: ', selectedGenres)
-
             const genreData = await updatedUserRes.json();
-            console.log('Sent to DB: ', genreData)
         } catch (error) {
-            console.error('Something went wrong: ', error)
         }
 
         setIsChange(true);

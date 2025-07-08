@@ -30,9 +30,7 @@ const UserEventTypes = ({user, baseURL}) => {
 
 
     const saveEventType = async () => {
-        // fetch 'PUT' endpoint to update DB when saved
         try {
-            console.log('about to fetch')
             const updatedUserRes = await fetch(`${baseURL}/api/user/eventType`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
@@ -40,12 +38,8 @@ const UserEventTypes = ({user, baseURL}) => {
                 body: JSON.stringify({ eventType: selectedEventType }),
             })
 
-            console.log('Preferred events saved!: ', selectedEventType)
-
             const eventTypeData = await updatedUserRes.json();
-            console.log('Sent to DB: ', eventTypeData)
         } catch (error) {
-            console.error('Something went wrong: ', error)
         }
     }
 

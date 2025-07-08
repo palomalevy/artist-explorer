@@ -19,9 +19,7 @@ const EditZipcode = ({user, baseURL, setEditing, setIsChange}) => {
             });
 
             const zipcodeData = await zipcodeRes.json();
-            console.log('Sent to DB: ', zipcodeData)
         } catch (error) {
-            console.error(error)
         }
 
         setEditing(false);
