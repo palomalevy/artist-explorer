@@ -26,7 +26,7 @@ const DiscoverPost = ({user, post}) => {
                 ))}
             </div>
             <div className="postLikeButton">
-                <LikeButton />
+                <LikeButton postID={post.id}/>
             </div> 
         </section>
     </>

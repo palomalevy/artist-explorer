@@ -1,33 +1,33 @@
 import React, { useState} from 'react'
+import { useUser } from "/src/contexts/UserContext";
 
-const LikeButton = () => {
-  const [heart, setHeart] = useState(false);
-//   TODO: add like button
+const LikeButton = ({postID}) => {
+  const { user, setUser } = useUser();
+  const baseURL = import.meta.env.VITE_BASE_URL
 
-  const handleLike = () => {
-    if (!heart) {
-      setHeart(true)
+
+  const handleLike = async () => {
+
+  
+   if (!user?.likedPosts?.includes(postID)) {
+      setUser(prev => ({
+        ...prev, 
+        likedPosts: [postID, ...prev.likedPosts]
+      }));
+
     } else {
-      setHeart(false)
+      setUser(prev => ({
+        ...prev,
+        likedPosts: prev.likedPosts.filter(id => id !== postID)
+      }));
     }
+    
   }
 
   return (
-    <article className="likeButtonContainer">
-      {heart ? (
-        <>
-          <button className='likeButton' onClick={handleLike}>
-            <img src="/src/assets/favorite-4-16.png" alt="heart" />
-          </button>
-        </>
-      ) : ( 
-        <>
-          <button className='likeButton' onClick={handleLike}>
-            <img src="/src/assets/hearts-16.png" alt="heart" />
-          </button>
-        </>
-      )}
-    </article>
+    <button className="likeButton" onClick={handleLike}>
+      <img src={user?.likedPosts?.includes(postID) ? "/src/assets/hearts-16.png" : "/src/assets/favorite-4-16.png"} alt="heart" />
+    </button>
   );
 };
 
