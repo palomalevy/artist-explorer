@@ -5,12 +5,9 @@ const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient();
 const posts = express.Router()
 
-function sortBy() {
-
-}
 // [POST] create a new post
 posts.post('/createPosts', async (req, res) => {
-    const { title, zipcode, caption, follow, postImages = [], musicURL, userID, postGenre } = req.body
+    const { title, zipcode, caption, follow, postImages = [], musicURL, userID, postGenre, postEventType } = req.body
     try {
         const postData = await prisma.post.create({
             data: {
@@ -21,7 +18,8 @@ posts.post('/createPosts', async (req, res) => {
                 follow,
                 authorId: userID,
                 postImages,
-                postGenre,
+                postGenre: { set: [postGenre] },
+                postEventType: { set: [postEventType] }
             },
             include: {
                 author: true,

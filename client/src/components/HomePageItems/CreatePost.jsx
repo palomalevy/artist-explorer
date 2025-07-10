@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import PostImages from './PostImages';
+import PostGenre from './CreatePostItems/PostGenre';
+import PostEventType from './CreatePostItems/PostEventType';
 
 const CreatePost = ({showModal, setShowModal, closePopup, user, setPosts}) => {
     const [title, setTitle] = useState('');
@@ -8,8 +10,8 @@ const CreatePost = ({showModal, setShowModal, closePopup, user, setPosts}) => {
     const [postImages, setPostImages] = useState(['']);
     const [musicURL, setMusicURL] = useState('');
     const [postGenre, setPostGenre] = useState('')
+    const [postEventType, setPostEventType] = useState('');
     const [error, setError] = useState('')
-    const [follow, setFollow] = useState(false)
     const baseURL = import.meta.env.VITE_BASE_URL
     const userID = user.id
 
@@ -33,11 +35,6 @@ const CreatePost = ({showModal, setShowModal, closePopup, user, setPosts}) => {
         setMusicURL(value);
     }
 
-    const handlePostGenreChange = (event) => {
-        const value = event.target.value;
-        setPostGenre(value);
-    }
-
     const handleSubmit = async (event) => {
         event.preventDefault();
         setError('');
@@ -49,7 +46,8 @@ const CreatePost = ({showModal, setShowModal, closePopup, user, setPosts}) => {
             zipcode: parseInt(event.target.zipcode.value),
             postImages: Array.isArray(postImages) ? postImages.filter(img => img.trim() !== '') : [],
             musicURL: event.target.musicURL.value,
-            postGenre: event.target.postGenre.value,
+            postGenre: postGenre,
+            postEventType: postEventType,
         }
 
         try {
@@ -70,7 +68,6 @@ const CreatePost = ({showModal, setShowModal, closePopup, user, setPosts}) => {
                 setCaption('');
                 setZipcode('');
                 setPostImages("");
-                setPostGenre('');
                 setMusicURL("");
                 closePopup();
             }
@@ -95,9 +92,8 @@ const CreatePost = ({showModal, setShowModal, closePopup, user, setPosts}) => {
                 <label>
                     Zipcode: <input type="number" name="zipcode" value={zipcode} onChange={handleZipcodeChange} />
                 </label>
-                <label>
-                    Post Genre: <input name="postGenre" value={postGenre} onChange={handlePostGenreChange} />
-                </label>
+                <PostGenre setPostGenre={setPostGenre} postGenre={postGenre}/>
+                <PostEventType setPostEventType={setPostEventType} postEventType={postEventType} />
                 <PostImages postImages={postImages} setPostImages={setPostImages}/>
                 <label>
                     Music URL: <input type="text" name="musicURL" value={musicURL} onChange={handleMusicURLChange} />

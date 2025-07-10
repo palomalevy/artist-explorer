@@ -38,7 +38,6 @@ const UserEventTypes = ({user, baseURL}) => {
                 body: JSON.stringify({ eventType: selectedEventType }),
             })
 
-            const eventTypeData = await updatedUserRes.json();
         } catch (error) {
         }
     }

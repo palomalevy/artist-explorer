@@ -42,7 +42,6 @@ const UserGenres = ({user, baseURL, setIsChange}) => {
                 body: JSON.stringify({ genres: selectedGenres }),
             })
 
-            const genreData = await updatedUserRes.json();
         } catch (error) {
         }
 
