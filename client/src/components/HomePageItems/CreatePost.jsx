@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import PostImages from './PostImages';
 import PostGenre from './CreatePostItems/PostGenre';
+import PostEventType from './CreatePostItems/PostEventType';
 
 const CreatePost = ({showModal, setShowModal, closePopup, user, setPosts}) => {
     const [title, setTitle] = useState('');
@@ -9,8 +10,8 @@ const CreatePost = ({showModal, setShowModal, closePopup, user, setPosts}) => {
     const [postImages, setPostImages] = useState(['']);
     const [musicURL, setMusicURL] = useState('');
     const [postGenre, setPostGenre] = useState('')
+    const [postEventType, setPostEventType] = useState('');
     const [error, setError] = useState('')
-    const [follow, setFollow] = useState(false)
     const baseURL = import.meta.env.VITE_BASE_URL
     const userID = user.id
 
@@ -46,6 +47,7 @@ const CreatePost = ({showModal, setShowModal, closePopup, user, setPosts}) => {
             postImages: Array.isArray(postImages) ? postImages.filter(img => img.trim() !== '') : [],
             musicURL: event.target.musicURL.value,
             postGenre: postGenre,
+            postEventType: postEventType,
         }
 
         try {
@@ -66,7 +68,6 @@ const CreatePost = ({showModal, setShowModal, closePopup, user, setPosts}) => {
                 setCaption('');
                 setZipcode('');
                 setPostImages("");
-                setPostGenre('');
                 setMusicURL("");
                 closePopup();
             }
@@ -92,6 +93,7 @@ const CreatePost = ({showModal, setShowModal, closePopup, user, setPosts}) => {
                     Zipcode: <input type="number" name="zipcode" value={zipcode} onChange={handleZipcodeChange} />
                 </label>
                 <PostGenre setPostGenre={setPostGenre} postGenre={postGenre}/>
+                <PostEventType setPostEventType={setPostEventType} postEventType={postEventType} />
                 <PostImages postImages={postImages} setPostImages={setPostImages}/>
                 <label>
                     Music URL: <input type="text" name="musicURL" value={musicURL} onChange={handleMusicURLChange} />
