@@ -76,4 +76,23 @@ users.put('/zipcode', async (req, res) => {
   }
 });
 
+users.put('/likedPosts', async (req, res) => {
+
+    const userID = req.session.userID
+    const likeStatus = req.body.updatedLikedPosts
+
+    try {
+      const updatedLikeStatus = await prisma.user.update({
+        where: { id: userID },
+        data: { likedPosts: likeStatus},
+      });
+
+      return res.json({ message: 'Post liked successfully!', likedPosts: updatedLikeStatus.likedPosts })
+
+    } catch (error) {
+      return res.status(500).json({error: "Failed to like post."})
+    }
+})
+
+
 module.exports = users;
