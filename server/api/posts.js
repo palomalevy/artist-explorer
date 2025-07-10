@@ -49,22 +49,4 @@ posts.get('/postInfo', async (req, res) => {
   }
 });
 
-posts.put('/likeStatus', async (req, res) => {
-
-    const authorID = req.body.author.id
-    const likeStatus = req.body.like
-
-    try {
-      const updatedLikeStatus = await prisma.user.update({
-        where: { id: authorID },
-        data: { like: likeStatus },
-      });
-
-      return res.json({ message: 'Post liked successfully!', like: updatedLikeStatus.like })
-
-    } catch (error) {
-      return res.status(500).json({error: "Failed to like post."})
-    }
-})
-
 module.exports = posts;

@@ -20,7 +20,7 @@ model User {
   posts        Post[]
   genres       Genre[] @default([POP, CLASSICAL, LATIN, HOUSE, COUNTRY, HIPHOP, JAZZ, ROCK, DISCO, EDM, BLUES, LOFI])
   eventType    Event[] @default([CONCERT, FESTIVAL, NIGHTCLUB, SPEAKEASY, BAND, STUDIO, AWARDS, CLASSES, THEATER])
-  likedPosts   String[] @default([])
+  likedPosts   Int[] @default([])
 }
 
 enum Genre {
