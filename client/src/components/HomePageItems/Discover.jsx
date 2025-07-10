@@ -44,7 +44,7 @@ const Discover = ({user}) => {
         <section className="newButtons">
           <button onClick={openPopup} className="createPostButton">+ Create Post</button>
         </section>
-        <CreatePost showModal={showModal} setShowModal={setShowModal} closePopup={closePopup} user={user} setPosts={setPosts}/>
+        <CreatePost showModal={showModal} setShowModal={setShowModal} closePopup={closePopup} user={user} setPosts={setPosts} posts={posts}/>
     </div>
     
   )

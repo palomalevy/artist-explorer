@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import PostImages from './PostImages';
+import PostGenre from './CreatePostItems/PostGenre';
 
 const CreatePost = ({showModal, setShowModal, closePopup, user, setPosts}) => {
     const [title, setTitle] = useState('');
@@ -33,11 +34,6 @@ const CreatePost = ({showModal, setShowModal, closePopup, user, setPosts}) => {
         setMusicURL(value);
     }
 
-    const handlePostGenreChange = (event) => {
-        const value = event.target.value;
-        setPostGenre(value);
-    }
-
     const handleSubmit = async (event) => {
         event.preventDefault();
         setError('');
@@ -49,7 +45,7 @@ const CreatePost = ({showModal, setShowModal, closePopup, user, setPosts}) => {
             zipcode: parseInt(event.target.zipcode.value),
             postImages: Array.isArray(postImages) ? postImages.filter(img => img.trim() !== '') : [],
             musicURL: event.target.musicURL.value,
-            postGenre: event.target.postGenre.value,
+            postGenre: postGenre,
         }
 
         try {
@@ -95,9 +91,7 @@ const CreatePost = ({showModal, setShowModal, closePopup, user, setPosts}) => {
                 <label>
                     Zipcode: <input type="number" name="zipcode" value={zipcode} onChange={handleZipcodeChange} />
                 </label>
-                <label>
-                    Post Genre: <input name="postGenre" value={postGenre} onChange={handlePostGenreChange} />
-                </label>
+                <PostGenre setPostGenre={setPostGenre} postGenre={postGenre}/>
                 <PostImages postImages={postImages} setPostImages={setPostImages}/>
                 <label>
                     Music URL: <input type="text" name="musicURL" value={musicURL} onChange={handleMusicURLChange} />
