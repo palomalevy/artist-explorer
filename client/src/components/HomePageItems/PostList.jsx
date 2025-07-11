@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router';
 import DiscoverPost from './DiscoverPost';
 
-
 const PostList = ({ posts, user }) => {
   
   return (

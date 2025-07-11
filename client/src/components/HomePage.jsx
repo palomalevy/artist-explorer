@@ -8,6 +8,8 @@ import { useUser } from "../contexts/UserContext";
 
 const HomePage = () => {
   const { user, setUser } = useUser();
+  const [myPosts, setMyPosts] = useState(false);
+  const [discover, setDiscover] = useState(true);
   const baseURL = import.meta.env.VITE_BASE_URL
 
   const fetchUserData = async () => {
@@ -15,9 +17,7 @@ const HomePage = () => {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             credentials: 'include',
-            body: JSON.stringify({
-                userID: user.id
-            }),
+            body: JSON.stringify({ userID: user.id }),
           });
 
           const data = await resData.json();
@@ -27,13 +27,13 @@ const HomePage = () => {
       useEffect(() => {
           fetchUserData();
       }, [user.id]);
-      
+
   return (
     <section className="homeBackground">
         <div>Pulse Home</div>
         <section className="container">
-            <LeftSideNav user={user}/>
-            <Discover user={user}/>
+            <LeftSideNav user={user} setMyPosts={setMyPosts} setDiscover={setDiscover}/>
+            <Discover user={user} myPosts={myPosts} discover={discover}/>
             <RightSideNav />
         </section>
     </section>
