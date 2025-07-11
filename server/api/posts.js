@@ -39,6 +39,24 @@ posts.get('/postInfo', async (req, res) => {
       include: { author: true },
       orderBy: { createdAt: 'desc'},
     });
+
+    res.json(posts);
+
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+posts.post('/myPosts', async (req, res) => {
+  
+  const userID = req.body.userID
+
+  try {
+    const posts = await prisma.post.findMany({
+      where: { authorId: Number(userID)},
+      orderBy: { createdAt: 'desc'},
+      include: { author: true },
+    });
     
     res.json(posts);
 

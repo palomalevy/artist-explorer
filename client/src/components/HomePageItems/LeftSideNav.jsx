@@ -2,7 +2,18 @@ import React from 'react'
 import {data} from '../../temp-data/temp-data';
 import { Link } from 'react-router-dom';
 
-const LeftSideNav = ({user}) => {
+const LeftSideNav = ({ user, setMyPosts, setDiscover }) => {
+
+    const handleMyPosts = () => {
+        setDiscover(false);
+        setMyPosts(true);
+    }
+
+    const handleDiscover = () => {
+        setDiscover(true);
+        setMyPosts(false);
+    }
+
   return (
     <>
         <section className="leftNavColumn">
@@ -15,9 +26,9 @@ const LeftSideNav = ({user}) => {
                 </div>
             </section>
             <section className="navButtons">
-                <button>Discover</button>
+                <button onClick={handleDiscover}>Discover</button>
                 <button>Following</button>
-                <button>My Posts</button>
+                <button onClick={handleMyPosts}>My Posts</button>
                 <Link to={`/profile`}><button>Settings</button></Link>
             </section>
         </section>

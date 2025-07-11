@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import PostList from './PostList'
 import CreatePost from './CreatePost';
 
-const Discover = ({user}) => {
+const Discover = ({user, myPosts, discover}) => {
   const [showModal, setShowModal] = useState(false)
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState('');
@@ -19,12 +19,28 @@ const Discover = ({user}) => {
     useEffect(() => {
       const fetchUserPosts = async () => {
         try {
-          const res = await fetch(`${baseURL}/api/posts/postInfo`);
-          const data = await res.json();
+          if (myPosts) {
+              const res = await fetch(`${baseURL}/api/posts/myPosts`, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ userID: user.id }),
+              });
+              
+              const data = await res.json();
 
-          if (!res.ok) throw new Error(data.message || 'Failed to load posts');
+              if (!res.ok) throw new Error(data.message || 'Failed to load posts');
 
-          setPosts(data);
+              setPosts(data);
+
+          } else if (discover) {
+              const res = await fetch(`${baseURL}/api/posts/postInfo`);
+              const data = await res.json();
+
+              if (!res.ok) throw new Error(data.message || 'Failed to load posts');
+
+              setPosts(data);
+          }
+
         } catch (err) {
           setError('Error fetching posts')
         }
@@ -33,11 +49,11 @@ const Discover = ({user}) => {
       if (user?.id) {
         fetchUserPosts();
       }
-    }, [user, baseURL]);
+    }, [user, discover]);
 
   return (
     <div className="discoverColumn">
-        <h2>Discover</h2>
+        <h2>{discover ? "Discover" : "My Posts"}</h2>
         <section className="userPosts">
           <PostList posts={posts} user={user}/>
         </section>
