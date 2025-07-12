@@ -33,7 +33,12 @@ const Discover = ({user, myPosts, discover}) => {
               setPosts(data);
 
           } else if (discover) {
-              const res = await fetch(`${baseURL}/api/posts/postInfo`);
+              const res = await fetch(`${baseURL}/api/posts/discoverPosts`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ userID: user.id })
+              });
+              
               const data = await res.json();
 
               if (!res.ok) throw new Error(data.message || 'Failed to load posts');
