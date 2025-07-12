@@ -1,5 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
+const { scorePost } = require('../utils/sortDiscoverPosts')
 const { PrismaClient } = require('@prisma/client')
 
 const prisma = new PrismaClient();
@@ -18,8 +19,8 @@ posts.post('/createPosts', async (req, res) => {
                 follow,
                 authorId: userID,
                 postImages,
-                postGenre: { set: [postGenre] },
-                postEventType: { set: [postEventType] }
+                postGenre,
+                postEventType
             },
             include: {
                 author: true,
@@ -64,6 +65,45 @@ posts.post('/myPosts', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
   }
+});
+
+posts.post('/discoverPosts', async (req, res) => {
+  const userID = req.body.userID;
+
+  try {
+      const user = await prisma.user.findUnique({
+        where: { id: userID },
+        select: {
+          genres: true,
+          eventType: true,
+          createdAt: true,
+        }
+      });
+
+      const posts = await prisma.post.findMany({
+        include: { author: true },
+      })
+
+      const scoredPosts = posts.map(post => ({
+        ...post,
+        score: scorePost(post, user),
+      }));
+
+      scoredPosts.sort((a, b) => {
+        const compareScore = b.score - a.score
+            if (compareScore !== 0) {
+              return compareScore;
+            }
+
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+      });
+
+      res.json(scoredPosts)
+
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+  
 });
 
 module.exports = posts;
