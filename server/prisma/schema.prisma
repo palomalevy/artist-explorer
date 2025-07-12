@@ -61,8 +61,8 @@ model Post {
   caption        String
   postImages     String[] @default([])
   musicURL       String?
-  postGenre      Genre[]
-  postEventType  Event[]
+  postGenre      Genre
+  postEventType  Event
 }
 
 

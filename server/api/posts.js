@@ -33,6 +33,7 @@ posts.post('/createPosts', async (req, res) => {
     }
 });
 
+// Temporary. Displays posts by most recent.
 posts.get('/postInfo', async (req, res) => {
   try {
     const posts = await prisma.post.findMany({
