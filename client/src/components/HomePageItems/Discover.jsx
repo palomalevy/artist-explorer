@@ -19,30 +19,24 @@ const Discover = ({user, myPosts, discover}) => {
     useEffect(() => {
       const fetchUserPosts = async () => {
         try {
+          let postColumn;
+
           if (myPosts) {
-              const res = await fetch(`${baseURL}/api/posts/myPosts`, {
+              postColumn = `${baseURL}/api/posts/myPosts`;
+          } else if (discover) {
+              postColumn = `${baseURL}/api/posts/discoverPosts`;
+          }
+
+          if (postColumn) {
+              const res = await fetch(postColumn, {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ userID: user.id }),
-              });
-              
+                  body: JSON.stringify({ userID: user.id })
+                })
+
               const data = await res.json();
 
               if (!res.ok) throw new Error(data.message || 'Failed to load posts');
-
-              setPosts(data);
-
-          } else if (discover) {
-              const res = await fetch(`${baseURL}/api/posts/discoverPosts`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ userID: user.id })
-              });
-              
-              const data = await res.json();
-
-              if (!res.ok) throw new Error(data.message || 'Failed to load posts');
-
               setPosts(data);
           }
 

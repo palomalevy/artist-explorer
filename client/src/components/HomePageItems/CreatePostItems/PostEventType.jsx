@@ -2,7 +2,7 @@ import React from 'react'
 
 const PostEventType = ({postEventType, setPostEventType}) => {
       
-    const allowedEvents = [
+    const allowedEventTypes = [
         "CONCERT", 
         "FESTIVAL", 
         "NIGHTCLUB", 
@@ -23,9 +23,9 @@ const PostEventType = ({postEventType, setPostEventType}) => {
         Event Type:
         <select value={postEventType} onChange={handleChange}>
             <option value="" selected disabled>Select Event</option>
-            {allowedEvents.map(event => (
-                <option key={event} value={event}>
-                    {event}
+            {allowedEventTypes.map(eventType => (
+                <option key={eventType} value={eventType}>
+                    {eventType}
                 </option>
             ))}
         </select>
