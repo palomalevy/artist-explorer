@@ -23,10 +23,7 @@ function cosineSimilarity(postVec, vecB) {
 
         return (dotProduct / (Math.sqrt(magPostVec) * Math.sqrt(magB)))
 
-    } catch (error) {
-        console.error(error)
-    }
-    
+    } catch (error) {}
 }
 
 module.exports = {cosineSimilarity}
