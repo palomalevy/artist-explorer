@@ -66,5 +66,15 @@
                 border-radius: 20px;
             }
         }
+        .postButtons {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            padding: 5px;
+
+            .followButton {
+                background-color: white;
+            }
+        }
     }
 }

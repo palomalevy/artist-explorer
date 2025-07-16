@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import LikeButton from './LikeButton'
+import FollowButton from './FollowButton';
 import { data } from '../../temp-data/temp-data';
 
 const DiscoverPost = ({user, post}) => {
@@ -25,8 +26,9 @@ const DiscoverPost = ({user, post}) => {
                  <img key={index} src={imgURL} alt={`Post image ${index + 1}`} />
                 ))}
             </div>
-            <div className="postLikeButton">
+            <div className="postButtons">
                 <LikeButton postID={post.id}/>
+                <FollowButton authorID={post.author.id}/>
             </div> 
         </section>
     </>
