@@ -1,9 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const { scorePost } = require('../utils/sortDiscoverPosts')
 const { PrismaClient } = require('@prisma/client')
-const { cosineSimilarity } = require('../utils/cosineSimilarity')
-const { defineVectorItem } = require('../utils/defineVectorItem')
+const { scorePost } = require('../utils/scorePosts')
 const prisma = new PrismaClient();
 const posts = express.Router()
 
@@ -61,7 +59,7 @@ posts.post('/myPosts', async (req, res) => {
       include: { author: true },
     });
     
-    res.json(posts);
+    res.json({posts: posts});
 
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
@@ -69,42 +67,57 @@ posts.post('/myPosts', async (req, res) => {
 });
 
 posts.post('/discoverPosts', async (req, res) => {
-  const userID = req.body.userID;
-
   try {
-      const user = await prisma.user.findUnique({
-        where: { id: userID },
+    const { userID } = req.body
+
+    const user = await prisma.user.findUnique({
+      where: { id: userID },
+      select: {
+        genres: true,
+        eventType: true,
+        likedPosts: true,
+      },
+    });
+
+    const likedPosts = await prisma.post.findMany({
+      where: { id: { in: user.likedPosts || [] }},
+      select: {
+        postGenre: true,
+        postEventType: true,
+      },
+    });
+
+    //TODO: CHANGE TO ONLY POSTS NOT CREATED BY USER
+    const posts = await prisma.post.findMany({
+      include: { author: {
         select: {
-          genres: true,
-          eventType: true,
-          createdAt: true,
+          id: true,
+          username: true,
+          name: true,
+          zipcode: true,
+        },
+      }},
+    })
+
+    const scoredPosts = posts.map(post => {
+      const score = scorePost(post, user, likedPosts);
+      return { ...post, score };
+    });
+
+    scoredPosts.sort((a, b) => {
+      const compareScore = b.score - a.score
+        if (compareScore !== 0) {
+          return compareScore;
         }
+      
+      
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
       });
 
-      const posts = await prisma.post.findMany({
-        include: { author: true },
-      })
+      res.json({posts: scoredPosts})
 
-      const scoredPosts = posts.map(post => ({
-        ...post,
-        score: scorePost(post, user),
-      }));
+  } catch (error) {}
+})
 
-      scoredPosts.sort((a, b) => {
-        const compareScore = b.score - a.score
-            if (compareScore !== 0) {
-              return compareScore;
-            }
-
-        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-      });
-
-      res.json(scoredPosts)
-
-  } catch (error) {
-    res.status(500).json({ error: 'Internal server error' });
-  }
-  
-});
 
 module.exports = posts;
