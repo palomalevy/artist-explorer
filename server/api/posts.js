@@ -1,9 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const { scorePost } = require('../utils/sortDiscoverPosts')
 const { PrismaClient } = require('@prisma/client')
-const { cosineSimilarity } = require('../utils/cosineSimilarity')
-const { defineVectorItem } = require('../utils/defineVectorItem')
+const { scorePost } = require('../utils/scorePosts')
 const prisma = new PrismaClient();
 const posts = express.Router()
 
@@ -106,5 +104,6 @@ posts.post('/discoverPosts', async (req, res) => {
   }
   
 });
+
 
 module.exports = posts;

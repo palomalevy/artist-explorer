@@ -53,8 +53,8 @@ function createFeatureVector(item, genreMap, eventTypeMap, allowedEventTypes, al
             if (index !== undefined) genreVector[index] = 1;
         }
         
-        if (Array.isArray(item.eventTypes)) {
-            for (const eventType of item.eventTypes) {
+        if (Array.isArray(item.eventType)) {
+            for (const eventType of item.eventType) {
                 const index = eventTypeMap[eventType];
                 if (index !== undefined) eventTypeVector[index] = 1;
             }

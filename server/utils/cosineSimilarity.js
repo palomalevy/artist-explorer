@@ -3,10 +3,6 @@ const prisma = new PrismaClient();
 
 function cosineSimilarity(postVec, vecB) {
     try {
-        if (postVec.length !== vecB.length) {
-        throw new Error("Vectors must be the same length");
-        }
-
         let dotProduct = 0;
         let magPostVec = 0;
         let magB = 0;
