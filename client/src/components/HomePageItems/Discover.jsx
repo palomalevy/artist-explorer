@@ -37,7 +37,7 @@ const Discover = ({user, myPosts, discover}) => {
               const data = await res.json();
 
               if (!res.ok) throw new Error(data.message || 'Failed to load posts');
-              setPosts(data);
+              setPosts(data.posts);
           }
 
         } catch (err) {
