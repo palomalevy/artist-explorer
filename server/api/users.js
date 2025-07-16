@@ -94,5 +94,23 @@ users.put('/likedPosts', async (req, res) => {
     }
 })
 
+users.put('/following', async (req, res) => {
+
+    const userID = req.session.userID
+    const followingStatus = req.body.updatedFollowing
+
+    try {
+      const updatedFollowing = await prisma.user.update({
+        where: { id: userID },
+        data: { following: followingStatus },
+      });
+
+      return res.json({ message: 'Post liked successfully!', following: updatedFollowing.following })
+
+    } catch (error) {
+      return res.status(500).json({error: "Failed to follow."})
+    }
+})
+
 
 module.exports = users;
