@@ -83,7 +83,6 @@ const ProfilePage = () => {
                         <p>Genres</p>
                         <article className="preferredItem">
                             <UserGenres user={user} baseURL={baseURL} setIsChange={setIsChange} />
-                            {/* <button>✔ Classical</button> */}
                         </article>
                         <p>Events</p>
                         <article className="preferredItem">

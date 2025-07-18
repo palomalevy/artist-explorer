@@ -1,6 +1,6 @@
 const { PrismaClient } = require('@prisma/client');
 const { defineVectorItem } = require('./defineVectorItem');
-const { cosineSimilarity } = require('../utils/cosineSimilarity')
+const { cosineSimilarity } = require('../math/cosineSimilarity')
 const prisma = new PrismaClient();
 
 function scorePost(post, user, likedPosts) {
