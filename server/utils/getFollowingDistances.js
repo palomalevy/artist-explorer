@@ -1,8 +1,8 @@
-const { getFollowing } = require('../utils/getFollowing')
+const { getFollowing } = require('./getFollowing')
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-async function bfsFollowing(currentUserID) {
+async function getFollowingDistances(currentUserID) {
 
     // queue of users to check at current level
     let usersToCheck = [currentUserID];
@@ -35,4 +35,4 @@ async function bfsFollowing(currentUserID) {
     return distance;
 };
 
-module.exports = { bfsFollowing };
+module.exports = { getFollowingDistances };
