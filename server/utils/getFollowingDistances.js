@@ -2,6 +2,12 @@ const { getFollowing } = require('./getFollowing')
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
+/* Function Description:
+Takes a userID and finds connected users by distance with BFS
+@param {string} currentUserID - the starting user we want to find all connected users from
+@return {string[i][j]} 2d array of connected userIDs where the 'i' is the distance from the initial user
+*/
+
 async function getFollowingDistances(currentUserID) {
 
     // queue of users to check at current level
@@ -23,16 +29,16 @@ async function getFollowingDistances(currentUserID) {
                 if (!checkedUsers.has(followingID)) {
                     checkedUsers.add(followingID);
                     newQueue.push(followingID);
-                };
-            };
-        };
+                }
+            }
+        }
 
         if (newQueue.length === 0) break;
 
         distance.push(newQueue);
         usersToCheck = newQueue;
-    };
+    }
     return distance;
-};
+}
 
 module.exports = { getFollowingDistances };
