@@ -7,7 +7,11 @@ async function getFollowing(userID) {
         select: { following: true },
     })
 
-    return (user && user.following) || [];
+    if (user != null && user.following != null) {
+        return user.following;
+    } else {
+        return []
+    }
 }
 
 module.exports = { getFollowing }

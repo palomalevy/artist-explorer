@@ -105,7 +105,7 @@ users.put('/following', async (req, res) => {
         data: { following: followingStatus },
       });
 
-      return res.json({ message: 'Post liked successfully!', following: updatedFollowing.following })
+      return res.json({ message: 'User followed successfully!', following: updatedFollowing.following })
 
     } catch (error) {
       return res.status(500).json({error: "Failed to follow."})
