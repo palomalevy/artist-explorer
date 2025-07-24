@@ -31,7 +31,8 @@
         gap: 10px;
 
         button{
-            background-color: #bc9b9b;
+            color: white;
+            background-color: #623a3a;
         } 
     }
 }
