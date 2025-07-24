@@ -16,8 +16,8 @@ async function getFollowingDistances(currentUserID) {
     // to begin, only includes the starting/current user
     const distance = [[currentUserID]];
 
-    // array of users that have already been checked, beginning with the starting user.
-    const checkedUsers = new Set([currentUserID]);
+    // array of users that have already been checked, begins empty.
+    const checkedUsers = new Set();
 
     while ( usersToCheck.length ) {
         const newQueue = [];
