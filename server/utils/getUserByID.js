@@ -12,6 +12,9 @@ async function getUserByID(userID) {
                 id: true,
                 genres: true,
                 eventType: true,
+                posts: {
+                    select: { id: true }
+                }
             }
         })
         return user;
