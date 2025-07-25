@@ -1,4 +1,5 @@
 const { fetchCoordinates } = require('./fetchCoordinates')
+const { haversineDistanceFormula } = require('../math/haversineDistanceFormula');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
@@ -10,7 +11,10 @@ async function compareZipcodes(user, post) {
         const userCoords = await fetchCoordinates(userZipcode);
         const postCoords = await fetchCoordinates(postZipcode);
 
-        return {userCoords, postCoords};
+        const binaryDistance = haversineDistanceFormula(userCoords, postCoords);
+        
+        // returns 1 if (distance < 80km) ; 0 otherwise
+        return binaryDistance;
 
     } catch (error) {}
 }
