@@ -1,9 +1,10 @@
 const { PrismaClient } = require('@prisma/client');
 const { defineVectorItem } = require('./defineVectorItem');
 const { cosineSimilarity } = require('../math/cosineSimilarity')
+const { compareZipcodes } = require('./compareZipcodes');
 const prisma = new PrismaClient();
 
-function scorePost(post, user, likedPosts) {
+async function scorePost(post, user, likedPosts) {
     const createPostVec = defineVectorItem(post)
     const createUserVec = defineVectorItem(user)
 
@@ -25,12 +26,15 @@ function scorePost(post, user, likedPosts) {
         likedPostSimilarity = likedPostVectorScores.reduce((sum, val) => sum + val, 0) / likedPostVectorScores.length;
     }
 
+    const distanceSim = await compareZipcodes(user, post) ?? 0;
+
     // assign weights
     const weightUserPrefSim = 0.3
-    const weightLikedPostSim = 0.7
+    const weightLikedPostSim = 0.6
+    const weightDistanceSim = 0.1
 
     // calc final score
-    const finalPostScore = (weightUserPrefSim * userPrefSimilarity) + (weightLikedPostSim * likedPostSimilarity)
+    const finalPostScore = (weightUserPrefSim * userPrefSimilarity) + (weightLikedPostSim * likedPostSimilarity) + (weightDistanceSim * distanceSim)
     
     return finalPostScore
 }
