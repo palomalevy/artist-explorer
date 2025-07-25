@@ -76,6 +76,7 @@ posts.post('/discoverPosts', async (req, res) => {
         genres: true,
         eventType: true,
         likedPosts: true,
+        zipcode: true,
       },
     });
 
@@ -84,6 +85,7 @@ posts.post('/discoverPosts', async (req, res) => {
       select: {
         postGenre: true,
         postEventType: true,
+        zipcode: true,
       },
     });
 
@@ -99,17 +101,18 @@ posts.post('/discoverPosts', async (req, res) => {
       }},
     })
 
-    const scoredPosts = posts.map(post => {
-      const score = scorePost(post, user, likedPosts);
-      return { ...post, score };
-    });
+    const scoredPosts = [];
 
+    for (const post of posts) {
+      const score = await scorePost(post, user, likedPosts);
+      scoredPosts.push({ ...post, score });
+    }
+      
     scoredPosts.sort((a, b) => {
       const compareScore = b.score - a.score
         if (compareScore !== 0) {
           return compareScore;
         }
-      
       
       return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
       });
