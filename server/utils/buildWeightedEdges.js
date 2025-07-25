@@ -21,8 +21,6 @@ async function buildWeightedEdges(user) {
             const fromUserObject = await getUserByID(fromUser) // gets user object
             const following = await getFollowing(fromUser); // get who they are following
 
-            const nextLayer = new Set(distance[ layer + 1 ]); // gets users in the next layer
-
             // for each user found in getFollowing(fromUser)
             for (const toUser of following) {
 
