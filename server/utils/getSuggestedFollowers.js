@@ -10,13 +10,11 @@ function formatSuggestions(path) {
     }
 
     suggestions.sort((a, b) => a.score - b.score);
-    
+
     return suggestions;
 }
 
 function getSuggestedFollowers(numUsers, edges, currentUserID) {
-
-    console.log('this got called')
     // initial distance (src => vertices) === 1e8 (infinity as a placeholder since it is unknown)
     let path = new Array(numUsers + 1).fill(1e8);
     path[currentUserID] = 0;
