@@ -1,13 +1,14 @@
 .spinner {
-  width: 40px;
-  height: 40px;
-  border: 5px solid #ccc;
-  border-top: 5px solid #4b6cb7;
+  width: 50px;
+  height: 50px;
+  border: 6px solid #e0e0e0;
+  border-top: 6px solid #854e4e;
   border-radius: 50%;
-  animation: spin 1s linear infinite;
+  animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   margin: 40px auto;
+  box-shadow: 0 0 10px #9b7272;
+  background: linear-gradient(45deg, #a67474, #623a3a);
 }
-
 @keyframes spin {
   to {
     transform: rotate(360deg);

@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Suspense} from 'react'
+import React, {useState, useEffect} from 'react'
 import PostList from './PostList'
 import CreatePost from './CreatePost';
 import LoadingSpinner from '../Styling/LoadingSpinner';
@@ -59,7 +59,7 @@ const Discover = ({user, myPosts, discover}) => {
 
 
     if (loading) return <LoadingSpinner />;
-    
+
   return (
     <div className="discoverColumn">
         <h2>{discover ? "Discover" : "My Posts"}</h2>
