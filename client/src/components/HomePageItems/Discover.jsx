@@ -1,11 +1,13 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, Suspense} from 'react'
 import PostList from './PostList'
 import CreatePost from './CreatePost';
+import LoadingSpinner from '../Styling/LoadingSpinner';
 
 const Discover = ({user, myPosts, discover}) => {
   const [showModal, setShowModal] = useState(false)
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const baseURL = import.meta.env.VITE_BASE_URL;
 
   const openPopup = () => {
@@ -18,6 +20,9 @@ const Discover = ({user, myPosts, discover}) => {
 
     useEffect(() => {
       const fetchUserPosts = async () => {
+
+        setLoading(true);
+
         try {
           let postColumn;
 
@@ -43,6 +48,8 @@ const Discover = ({user, myPosts, discover}) => {
         } catch (err) {
           setError('Error fetching posts')
         }
+
+        setLoading(false);
     };
 
       if (user?.id) {
@@ -50,6 +57,9 @@ const Discover = ({user, myPosts, discover}) => {
       }
     }, [user, discover]);
 
+
+    if (loading) return <LoadingSpinner />;
+    
   return (
     <div className="discoverColumn">
         <h2>{discover ? "Discover" : "My Posts"}</h2>
