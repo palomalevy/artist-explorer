@@ -8,7 +8,7 @@ async function fetchCoordinates(zipcode) {
         const zipcodeInt = parseInt(zipcode, 10);
         const country = "US";
 
-        const res = await fetch(`https://api.zipcodestack.com/v1/search?apikey=${API_KEY}&codes=${zipcodeInt}&country=${country}`)
+        const res = await fetch(`https://app.zipcodebase.com/api/v1/search?apikey=${API_KEY}&codes=${zipcodeInt}&country=${country}`)
         const locationData = await res.json();
 
         const coordinates = locationData.results[zipcode]?.[0]
