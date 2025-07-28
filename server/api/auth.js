@@ -1,6 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const { PrismaClient } = require('@prisma/client')
+const { PrismaClient } = require('@prisma/client');
+const { fetchCoordinates } = require('../utils/fetchCoordinates');
 
 const prisma = new PrismaClient();
 const auth = express.Router()
@@ -26,6 +27,12 @@ auth.post('/signup', async (req, res) => {
         if (!passwordLengthValid) {
             return res.send({ message: 'Password must be at least 8 characters long!' });
         }
+        const coordinates = await fetchCoordinates(zipcode);
+        if (!coordinates) {
+            return res.send({ message: 'Invalid zipcode or failed to fetch coordinates' })
+        }
+        const { latitude, longitude } = coordinates;
+
         const user = await prisma.user.create({
             data: {
             name,
@@ -33,6 +40,8 @@ auth.post('/signup', async (req, res) => {
             email,
             passwordHash: hash,
             zipcode,
+            latitude,
+            longitude,
             },
         });
 
@@ -42,7 +51,7 @@ auth.post('/signup', async (req, res) => {
         res.send({ userID : user.id, message: 'user auth successful' })
 
         } catch (error) {
-        res.send({ message: 'An error occurred during sign up.' });
+            res.send({ message: 'An error occurred during sign up.' });
         }
 });
 
@@ -76,6 +85,7 @@ auth.post('/login', async (req, res) => {
             res.send({ userID : user.id, message: 'user auth successful' })
 
     } catch (error) {
+        console.error(error)
         res.status(500).json({ error: "Something went wrong during login" })
     }
 });

@@ -26,15 +26,13 @@ async function scorePost(post, user, likedPosts) {
         likedPostSimilarity = likedPostVectorScores.reduce((sum, val) => sum + val, 0) / likedPostVectorScores.length;
     }
 
-    const distanceSim = await compareZipcodes(user, post) ?? 0;
 
     // assign weights
     const weightUserPrefSim = 0.3
     const weightLikedPostSim = 0.6
-    const weightDistanceSim = 0.1
 
     // calc final score
-    const finalPostScore = (weightUserPrefSim * userPrefSimilarity) + (weightLikedPostSim * likedPostSimilarity) + (weightDistanceSim * distanceSim)
+    const finalPostScore = (weightUserPrefSim * userPrefSimilarity) + (weightLikedPostSim * likedPostSimilarity)
     
     return finalPostScore
 }

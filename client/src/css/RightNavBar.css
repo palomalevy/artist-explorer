@@ -48,9 +48,6 @@
         .suggestionsBox {
             display: flex;
             flex-direction: column;
-            background-color: #d0c2c2;
-            padding: 10px;
-            border-radius: 30px;
             flex-wrap: wrap;
             overflow: scroll;
 
@@ -58,8 +55,12 @@
             .artistInfo {
                 display: flex;
                 flex-direction: row;
+                background-color: #d0c2c2;
+                border-radius: 30px;
+                padding: 10px;
                 align-items: center;
                 gap: 10px;
+                margin-top: 5px;
                 padding-bottom: 10px;
                 flex-wrap: wrap;
 
@@ -77,6 +78,10 @@
 
                 .userName {
                     font-size: small;
+                }
+
+                .followButton {
+                    background-color: white;
                 }
             }; 
         };

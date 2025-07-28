@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import Discover from './HomePageItems/Discover'
+import Discover from './HomePageItems/DiscoverColumn/Discover'
 import LeftSideNav from './HomePageItems/LeftSideNav';
-import RightSideNav from './HomePageItems/RightSideNav';
+import RightSideNav from './HomePageItems/RightSideNavItems/RightSideNav';
 import WithAuth from './WithAuth'
 import { useUser } from "../contexts/UserContext";
 

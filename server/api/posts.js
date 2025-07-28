@@ -1,18 +1,29 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const { PrismaClient } = require('@prisma/client')
-const { scorePost } = require('../utils/scorePosts')
+const { scorePost } = require('../utils/scorePosts');
+const { fetchCoordinates } = require('../utils/fetchCoordinates');
 const prisma = new PrismaClient();
 const posts = express.Router()
 
 // [POST] create a new post
 posts.post('/createPosts', async (req, res) => {
     const { title, zipcode, caption, follow, postImages = [], musicURL, userID, postGenre, postEventType } = req.body
+    
+    const coordinates = await fetchCoordinates(zipcode);
+        if (!coordinates) {
+            return res.send({ message: 'Invalid zipcode or failed to fetch coordinates' })
+        }
+    
+    const { latitude, longitude } = coordinates;
+
     try {
         const postData = await prisma.post.create({
             data: {
                 title,
                 zipcode,
+                latitude,
+                longitude,
                 caption,
                 musicURL,
                 follow,
@@ -29,7 +40,7 @@ posts.post('/createPosts', async (req, res) => {
         res.json(postData);
     } 
     catch (error) {
-        res.status(500).json({ message: `Internal Server Error: ${error}` });
+      res.status(500).json({ message: `Internal Server Error: ${error}` });
     }
 });
 
