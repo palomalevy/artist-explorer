@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import PostList from './PostList'
-import CreatePost from './CreatePost';
-import LoadingSpinner from '../Styling/LoadingSpinner';
+import CreatePost from '../CreatePostItems/CreatePost';
+import LoadingSpinner from '../../Styling/LoadingSpinner';
 
 const Discover = ({user, myPosts, discover}) => {
   const [showModal, setShowModal] = useState(false)

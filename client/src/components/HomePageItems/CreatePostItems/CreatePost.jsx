@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PostImages from './PostImages';
-import PostGenre from './CreatePostItems/PostGenre';
-import PostEventType from './CreatePostItems/PostEventType';
+import PostGenre from './PostGenre';
+import PostEventType from './PostEventType';
 
 const CreatePost = ({showModal, setShowModal, closePopup, user, setPosts}) => {
     const [title, setTitle] = useState('');

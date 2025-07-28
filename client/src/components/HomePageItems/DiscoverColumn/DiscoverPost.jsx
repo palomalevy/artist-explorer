@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import LikeButton from './LikeButton'
-import FollowButton from './FollowButton';
-import { data } from '../../temp-data/temp-data';
+import FollowButton from '../FollowButton';
+import { data } from '../../../temp-data/temp-data';
 
 const DiscoverPost = ({user, post}) => {
 
