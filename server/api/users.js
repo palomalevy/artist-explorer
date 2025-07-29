@@ -1,7 +1,8 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const { PrismaClient } = require('@prisma/client')
-
+const { buildWeightedEdges } = require('../utils/buildWeightedEdges')
+const { getSuggestedFollowers } = require('../utils/getSuggestedFollowers')
 const prisma = new PrismaClient();
 const users = express.Router()
 
@@ -110,6 +111,22 @@ users.put('/following', async (req, res) => {
     } catch (error) {
       return res.status(500).json({error: "Failed to follow."})
     }
+})
+
+users.post('/suggestUsersToFollow', async (req, res) => {
+ try {
+   const { userID } = req.body
+
+   const edges = await buildWeightedEdges(userID);
+   const numUsers = await prisma.user.count();
+   const suggestions = getSuggestedFollowers(numUsers, edges, userID);
+
+   res.json({userID, suggestions})
+
+ } catch (error) {
+   res.status(500).json({ error: 'Failed to get suggested followers' });
+ }
+ 
 })
 
 
