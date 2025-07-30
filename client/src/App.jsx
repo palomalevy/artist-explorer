@@ -15,12 +15,21 @@ import '../src/css/PopupModal.css'
 import CreateAccount from './components/CreateAccount';
 import ProfilePage from './components/ProfilePage';
 import WithAuth from './components/WithAuth';
+import Aurora from './components/Styling/Aurora';
 
 function App() {
   const { userID } = useParams()
 
   return (
     <>
+      <Aurora
+          colorStops={["#3A29FF", "#FF94B4", "#FF3232"]}
+          blend={1.0}
+          amplitude={1.5}
+          speed={0.6}
+          className="aurora-container"
+      />
+
       <Routes>
         <Route path="/home" element={<HomePage />} />
         <Route path="/profile" element={<ProfilePage />} />

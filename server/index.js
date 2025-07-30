@@ -12,7 +12,7 @@ const posts = require('./api/posts')
 const { ValidationError } = require('./middleware/CustomErrors')
 
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: 'http://localhost:5174',
   credentials: true
 }))
 

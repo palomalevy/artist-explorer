@@ -9,7 +9,7 @@ const SuggestedUser = ({user}) => {
             <img src={data[0].post.images[4]}alt="userPost" />
             <div className="artistInfoText">
                 <p>{user.name}</p>
-                <p className="userName">{user.username}</p>
+                <p className="userName">@{user.username}</p>
             </div>
            <FollowButton targetUserID={user.id}/>
         </div>
