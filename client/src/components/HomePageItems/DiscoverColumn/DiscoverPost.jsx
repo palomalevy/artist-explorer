@@ -28,7 +28,7 @@ const DiscoverPost = ({user, post}) => {
             </div>
             <div className="postButtons">
                 <LikeButton postID={post.id}/>
-                <FollowButton authorID={post.author.id}/>
+                <FollowButton targetUserID={post.author.id}/>
             </div> 
         </section>
     </>
