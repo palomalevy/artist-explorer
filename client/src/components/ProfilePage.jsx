@@ -13,6 +13,7 @@ const ProfilePage = () => {
     const [editing, setEditing] = useState(false);
     const [isChange, setIsChange] = useState(false);
     const baseURL = import.meta.env.VITE_BASE_URL
+    const imageBaseURL = 'http://localhost:3000'
 
     const fetchUserData = async () => {
         const resData = await fetch(`${baseURL}/api/user/userInfo`, {
@@ -42,10 +43,10 @@ const ProfilePage = () => {
     return (
     <section className="profileContainer">
         <section className="profilePage">
-            <Link to={`/home`}><h2 className='backButton'>❮</h2></Link>
+            <Link to={`/home`}><h2 className='linkTo'>❮</h2></Link>
             <section className="mainPfp">
                 <Link to={`/home`}>
-                    <img src={`https://picsum.photos/200?random=${user.id}`} alt="imageURL" />
+                    <img src={`${imageBaseURL}${user.imageURL}`} alt="imageURL" />
                 </Link>
                 <div className="userInfo">
                     <h3>{user.name}</h3>
@@ -80,14 +81,18 @@ const ProfilePage = () => {
                 <section className="allPreferences">
                     <h3>Preferences</h3>
                     <section className="preferences">
-                        <p>Genres</p>
-                        <article className="preferredItem">
+                        <div className="genreColumn">
+                            <p><b>Genres</b></p>
+                            <article className="preferredItem">
                             <UserGenres user={user} baseURL={baseURL} setIsChange={setIsChange} />
-                        </article>
-                        <p>Events</p>
-                        <article className="preferredItem">
-                            <UserEventTypes user={user} baseURL={baseURL} setIsChange={setIsChange} />
-                        </article>
+                            </article>
+                        </div>
+                        <div className="eventsColumn">
+                            <p><b>Events</b></p>
+                            <article className="preferredItem">
+                                <UserEventTypes user={user} baseURL={baseURL} setIsChange={setIsChange} />
+                            </article>
+                        </div>
                     </section>
                 </section>
 

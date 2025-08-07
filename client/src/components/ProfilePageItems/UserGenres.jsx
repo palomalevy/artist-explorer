@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 
 const UserGenres = ({user, baseURL, setIsChange}) => {
     const [selectedGenres, setSelectedGenres] = useState([]);
+    const [isEditing, setIsEditing] = useState(false);
 
     const allowedGenres = [
         "POP", 
@@ -24,7 +25,7 @@ const UserGenres = ({user, baseURL, setIsChange}) => {
         }
     }, [user])
 
-    if (!user?.genres) return <div>Loading genres...</div>;
+    if (!user) return <div>Loading user data...</div>;
 
     const handleChange = (event) => {
         const selected = Array.from(event.target.selectedOptions).map(option => option.value);
@@ -41,7 +42,7 @@ const UserGenres = ({user, baseURL, setIsChange}) => {
                 credentials: 'include',
                 body: JSON.stringify({ genres: selectedGenres }),
             })
-
+            setIsEditing(false);
         } catch (error) {
         }
 
@@ -50,15 +51,54 @@ const UserGenres = ({user, baseURL, setIsChange}) => {
 
   return (
     <div>
-        <select multiple value={selectedGenres} onChange={handleChange}>
-            {allowedGenres.map(genre => (
-                <option key={genre} value={genre} >
+      {!isEditing ? (
+        <>
+          <p className="selectedItems">
+            {selectedGenres.length ? (
+            <ul style={{ paddingLeft: 0, listStyle: 'none', margin: 0 }}>
+                {selectedGenres.map((genre) => (
+                <li
+                    key={genre}
+                    style={{
+                    padding: '4px 4px',
+                    marginBottom: '2px',
+                    backgroundColor: '#9D8189',
+                    color: 'white',
+                    borderRadius: '10px',
+                    display: 'inline-block',
+                    display: 'block',
+                    width: 'fit-content',
+                    }}
+                >
                     {genre}
-                </option>
+                </li>
+                ))}
+            </ul>
+            ) : (
+                <em>None selected</em>
+            )}
+          </p>
+          <button onClick={() => setIsEditing(true)}>Edit</button>
+        </>
+      ) : (
+        <>
+          <select
+            multiple
+            size={allowedGenres.length}
+            value={selectedGenres}
+            onChange={handleChange}
+            className="multi-select"
+            autoFocus
+          >
+            {allowedGenres.map((genre) => (
+              <option key={genre} value={genre}>
+                {genre}
+              </option>
             ))}
-        </select>
-        <button onClick={saveGenres}>Save Genres</button>
-        <p>Selected Options: {selectedGenres.join(', ')}</p>
+          </select>
+          <button onClick={saveGenres}>Save</button>
+        </>
+      )}
     </div>
   )
 }

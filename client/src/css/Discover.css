@@ -2,30 +2,32 @@
     display: flex;
     flex-direction: column;
     text-align: left;
-    width: 40vw;
-    height: 90vh;
+    width: 45vw;
+    color: white;
+    padding-top: 20px;
+    padding-bottom: 20px;
 
-    .newButtons {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 5px;
-    }
-    
     .userPosts {
-        max-height: 80vh;
         overflow: scroll;
+    }
+
+    h2 {
+        padding-bottom: 5px;
     }
 
     .userPost {
         display: flex;
         flex-direction: column;
-        background-color: #d0c2c2;
-        border-radius: 30px;
-        margin-bottom: 3%;
+        background-color: rgba(202, 210, 197, 0.8);
+        margin-bottom: 5px;
+        margin-right: 3%;
         flex-wrap: wrap;
         padding-left: 2vw;
         padding-right: 2vw;
+        border-radius: 10px;
+        color: black;
+        font-family: "Outfit", sans-serif;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 
         .postHeader {
             display: flex;
@@ -66,15 +68,29 @@
                 border-radius: 20px;
             }
         }
+        .postSongs {
+            border-radius: 100px;
+        }
         .postButtons {
             display: flex;
-            gap: 5px;
+            gap: 10px;
             flex-wrap: wrap;
             padding: 5px;
+            padding-bottom: 20px;
 
             .followButton {
+                color: black;
                 background-color: white;
+                font-size: small;
+                padding-left: 10px;
+                padding-right: 10px;
             }
         }
+    }
+}
+
+@media only screen and (max-width: 699px) {
+    .discoverColumn {
+        width: 75vw;
     }
 }

@@ -1,51 +1,75 @@
-import React, {useState}  from 'react'
+import React, {useEffect, useState}  from 'react'
 import {data} from '../../temp-data/temp-data';
 import ShinyText from '../Styling/ShinyText';
 import { Link } from 'react-router-dom';
+import CreatePost from './CreatePostItems/CreatePost';
 
-const LeftSideNav = ({ user, setMyPosts, setDiscover }) => {
-    const [clickedDiscover, setClickedDiscover] = useState(false);
-    const [clickedFollowing, setClickedFollowing] = useState(false);
-    const [clickedMyPosts, setClickedMyPosts] = useState(false);
+const LeftSideNav = ({ user, setMyPosts, setDiscover, setFollowingPage }) => {
+    const [showModal, setShowModal] = useState(false)
+    const [posts, setPosts] = useState([]);
+
+    const baseURL = 'http://localhost:3000'
+
+    const openPopup = () => {
+        setShowModal(true)
+    }
+
+    const closePopup = () => {
+        setShowModal(false)
+    }
 
     const handleMyPosts = () => {
-        setClickedDiscover(true);
-        setClickedMyPosts(false);
-        setClickedFollowing(true);
+        setFollowingPage(false);
         setDiscover(false);
         setMyPosts(true);
     }
 
     const handleDiscover = () => {
-        setClickedDiscover(false);
-        setClickedMyPosts(true);
-        setClickedFollowing(true);
+        setFollowingPage(false);
         setDiscover(true);
         setMyPosts(false);
     }
 
     const handleFollowing = () => {
-        setClickedDiscover(true);
-        setClickedMyPosts(true);
-        setClickedFollowing(false);
+        setFollowingPage(true);
+        setDiscover(false);
+        setMyPosts(false);
     }
+    
+    useEffect(() => {
+        const fetchUserPosts = async () => {
+            const res = await fetch(postColumn, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userID: user.id })
+                    })
+
+                const data = await res.json();
+
+                if (!res.ok) throw new Error(data.message || 'Failed to load posts');
+                setPosts(data.posts);
+        }
+    }, [])
 
   return (
     <>
         <section className="leftNavColumn">
-            <div>LeftSideNav</div>
             <section className="mainPfp">
-                <Link to={`/profile`}><img src={`https://picsum.photos/200?random=${user.id}`} alt="userPfp"/></Link>
+                <Link to={`/profile`}><img src={`${baseURL}${user.imageURL}`} alt="userPfp"/></Link>
                 <div className="userInfo">
                     <h3>{user.name}</h3>
                     <p>{user.username}</p>
                 </div>
             </section>
             <section className="navButtons">
-                <button onClick={handleDiscover}><ShinyText text="Discover" disabled={clickedDiscover} speed={3} className='custom-class' /></button>
-                <button onClick={handleFollowing}><ShinyText text="Following" disabled={clickedFollowing} speed={3} className='custom-class' /></button>
-                <button onClick={handleMyPosts}><ShinyText text="My Posts" disabled={clickedMyPosts} speed={3} className='custom-class' /></button>
-                <Link to={`/profile`}><button>Settings</button></Link>
+                <button onClick={handleDiscover}>Discover</button>
+                <button onClick={handleFollowing}>Following</button>
+                <button onClick={handleMyPosts}>My Posts</button>
+                <section className="newButtons">
+                    <button onClick={openPopup} className="createPostButton">+ Create Post</button>
+                </section>
+                <CreatePost showModal={showModal} setShowModal={setShowModal} closePopup={closePopup} user={user} setPosts={setPosts} posts={posts}/>
+                <Link to={`/profile`}><button><img src='/src/assets/settings-23-24.ico' /></button></Link>
             </section>
         </section>
     </>

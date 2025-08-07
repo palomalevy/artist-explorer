@@ -2,37 +2,51 @@ import React from 'react'
 
 const PostImages = ({postImages, setPostImages}) => {
 
-    const handlePostImagesChange = (index, value) => {
+    const handleFileChange = (index, event) => {
+        const file = event.target.files[0];
         setPostImages((prevImages) => {
             const newImages = [...prevImages];
-            newImages[index] = value.trim();
+            newImages[index] = file;
             return newImages;
         });
     };
 
     const addImageField = () => {
-        setPostImages([...postImages, '']);
+        setPostImages((prevImages) => [...prevImages, null]);
     };
 
     const removeImageField = (index) => {
-        const updatedImages = [...postImages];
-        updatedImages.splice(index, 1);
-        setPostImages(updatedImages);
+        setPostImages(prevImages => prevImages.filter((_, i) => i !== index));
     };
 
   return (
-    <label>
-        Image URL:
-        {Array.isArray(postImages) && postImages.map((img, imageIndex) => (
-            <div key={imageIndex}>
-                <input type="text" value={img || ''} placeholder={`Image URL #${imageIndex + 1}`} onChange={(event) => handlePostImagesChange(imageIndex, event.target.value)} />
-                {postImages.length > 1 && (
-                    <button type="button" onClick={() => removeImageField(imageIndex)}>Remove</button>
-                )}
-            </div>
+    <div>
+      <label className="imageField">
+        Upload Images:
+        {postImages.map((img, index) => (
+          <div key={index}>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => handleFileChange(index, e)}  // Handle file change
+            />
+            {img && (
+              <img
+                src={URL.createObjectURL(img)}  // Show image preview
+                alt={`Preview #${index + 1}`}
+                style={{ width: 100, height: 100, objectFit: 'cover', marginTop: 5 }}
+              />
+            )}
+            <button type="button" onClick={() => removeImageField(index)}>
+              Remove
+            </button>
+          </div>
         ))}
-        <button type="button" onClick={addImageField}>Add another image</button>
-    </label>
+      </label>
+      <button type="button" onClick={addImageField}>
+        Add Image
+      </button>
+    </div>
   )
 }
 

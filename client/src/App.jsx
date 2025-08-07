@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Routes, Route, useParams } from 'react-router-dom';
 import reactLogo from './assets/react.svg'
 import './App.css'
@@ -23,7 +23,7 @@ function App() {
   return (
     <>
       <Aurora
-          colorStops={["#3A29FF", "#FF94B4", "#FF3232"]}
+          colorStops={["#2f3e46", "#354f52", "#52796f"]}
           blend={1.0}
           amplitude={1.5}
           speed={0.6}

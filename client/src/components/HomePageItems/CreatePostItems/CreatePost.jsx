@@ -7,7 +7,7 @@ const CreatePost = ({showModal, setShowModal, closePopup, user, setPosts}) => {
     const [title, setTitle] = useState('');
     const [zipcode, setZipcode] = useState('');
     const [caption, setCaption] = useState('');
-    const [postImages, setPostImages] = useState(['']);
+    const [postImages, setPostImages] = useState([]);
     const [musicURL, setMusicURL] = useState('');
     const [postGenre, setPostGenre] = useState('')
     const [postEventType, setPostEventType] = useState('');
@@ -39,48 +39,50 @@ const CreatePost = ({showModal, setShowModal, closePopup, user, setPosts}) => {
         event.preventDefault();
         setError('');
 
-        const newPost = {
-            userID: parseInt(userID),
-            title: event.target.title.value,
-            caption: event.target.caption.value,
-            zipcode: parseInt(event.target.zipcode.value),
-            postImages: Array.isArray(postImages) ? postImages.filter(img => img.trim() !== '') : [],
-            musicURL: event.target.musicURL.value,
-            postGenre: postGenre,
-            postEventType: postEventType,
-        }
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('caption', caption);
+        formData.append('zipcode', parseInt(zipcode));
+        formData.append('musicURL', musicURL);
+        formData.append('postGenre', postGenre);
+        formData.append('postEventType', postEventType);
+        formData.append('userID', userID);
+
+        postImages.forEach((image, index) => {
+            if (image) {
+                formData.append('images', image);  // 'images' is the field name used in the backend (use same name)
+            }
+        });
 
         try {
             const postRes = await fetch(`${baseURL}/api/posts/createPosts`, {
                 method: 'POST',
-                headers: { "Content-Type": "application/json" },
                 credentials: 'include',
-                body: JSON.stringify(newPost),
+                body: formData,
             })
             
             if (postRes.ok) {
-                const newPost = await postRes.json()
-                setPosts((prevPosts) => {
-                    const safePrev = Array.isArray(prevPosts) ? prevPosts : [];
-                    return [...safePrev, newPost];
-                })
-                setTitle("");
+                const newPost = await postRes.json();
+                setPosts((prevPosts) => [...prevPosts, newPost]);
+                // Reset the form
+                setTitle('');
                 setCaption('');
                 setZipcode('');
-                setPostImages("");
-                setMusicURL("");
+                setPostImages([]);
+                setMusicURL('');
                 closePopup();
             }
-            
-        } catch(err) {
-            setError('Failed to create a new post.')
+        } catch (err) {
+            console.error(err)
+            setError('Failed to create a new post.');
         }
     };
 
     return (
-    <>
-        <section className={`popup ${showModal ? "visible" : "notVisible"}`}>
-            <button className='closeButton' onClick={() => setShowModal(false)}>x</button>
+    <>       
+        <div className={`overlay ${showModal ? "visible" : "notVisible"}`} onClick={() => setShowModal(false)} >
+        <section className={`popup ${showModal ? "visible" : "notVisible"}`} onClick={(e) => e.stopPropagation()}>
+        <button className="closeButton" onClick={() => setShowModal(false)}>&times;</button>
             <form onSubmit={handleSubmit}>
                 <h2>Create a New Post!</h2>
                 <label>
@@ -92,16 +94,16 @@ const CreatePost = ({showModal, setShowModal, closePopup, user, setPosts}) => {
                 <label>
                     Zipcode: <input type="number" name="zipcode" value={zipcode} onChange={handleZipcodeChange} />
                 </label>
-                <PostGenre setPostGenre={setPostGenre} postGenre={postGenre}/>
-                <PostEventType setPostEventType={setPostEventType} postEventType={postEventType} />
-                <PostImages postImages={postImages} setPostImages={setPostImages}/>
+                    <PostGenre setPostGenre={setPostGenre} postGenre={postGenre}/>
+                    <PostEventType setPostEventType={setPostEventType} postEventType={postEventType} />
+                    <PostImages postImages={postImages} setPostImages={setPostImages}/>
                 <label>
-                    Music URL: <input type="text" name="musicURL" value={musicURL} onChange={handleMusicURLChange} />
+                    Music URL: <input type="text" name="musicURL" placeholder="Paste SoundCloud URL" value={musicURL} onChange={handleMusicURLChange} />
                 </label>
                 <button className="popupButton" type="submit">Post</button>
             </form>
         </section>
-        <div className={`overlay ${showModal ? "visible" : "notVisible"}`}></div>
+        </div>
     </>
   )
 }

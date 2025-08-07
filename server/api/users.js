@@ -118,29 +118,29 @@ users.put('/following', async (req, res) => {
 
 users.post('/suggestUsersToFollow', async (req, res) => {
   try {
-    const userID = req.session.userID;
-    const edges = await buildWeightedEdges(userID);
-    const numUsers = await prisma.user.count();
+      const userID = req.session.userID;
+      const edges = await buildWeightedEdges(userID);
+      const numUsers = await prisma.user.count();
 
-    const rawSuggestions = getSuggestedFollowers(numUsers, edges, userID);
-    const suggestionIDs = rawSuggestions.map(suggestion => suggestion.userID);
+      const rawSuggestions = getSuggestedFollowers(numUsers, edges, userID);
+      const suggestionIDs = rawSuggestions.map(suggestion => suggestion.userID);
 
-    const suggestedUsers = await getUsersByIDs(suggestionIDs);
+      const suggestedUsers = await getUsersByIDs(suggestionIDs);
 
-    // transforms array of user object into array of key-value pairs
-    // key = user's id; value = user object
-    const userMap = new Map(suggestedUsers.map(user => [user.id, user]));
+      // transforms array of user object into array of key-value pairs
+      // key = user's id; value = user object
+      const userMap = new Map(suggestedUsers.map(user => [user.id, user]));
 
-    const suggestionsWithScores = suggestionIDs.map(id => {
-      const user = userMap.get(id);
-      const score = rawSuggestions.find(suggestion => suggestion.userID === id)?.score;
-      return { ...user, score };
-    })
+      const suggestionsWithScores = suggestionIDs.map(id => {
+          const user = userMap.get(id);
+          const score = rawSuggestions.find(suggestion => suggestion.userID === id)?.score;
+          return { ...user, score };
+      })
 
-    res.json({userID, suggestions: suggestionsWithScores})
+      res.json({userID, suggestions: suggestionsWithScores})
 
   } catch (error) {
-    res.status(500).json({ error: 'Failed to get suggested followers' });
+      res.status(500).json({ error: 'Failed to get suggested followers' });
   }
 })
 
