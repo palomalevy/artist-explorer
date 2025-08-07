@@ -2,14 +2,17 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const { PrismaClient } = require('@prisma/client');
 const { fetchCoordinates } = require('../utils/fetchCoordinates');
+const upload = require('../middleware/upload');
 
 const prisma = new PrismaClient();
 const auth = express.Router()
 
 // [POST]signup
-auth.post('/signup', async (req, res) => {
+auth.post('/signup', upload.single('imageURL'), async (req, res) => {
     const {name, username, password, email, zipcode } = req.body
     const hash = await bcrypt.hash(password, 13)
+
+    const imagePath = req.file ? `/uploads/${req.file.filename}` : null;
 
     try {
         const existingUser = await prisma.user.findUnique({
@@ -35,13 +38,14 @@ auth.post('/signup', async (req, res) => {
 
         const user = await prisma.user.create({
             data: {
-            name,
-            username,
-            email,
-            passwordHash: hash,
-            zipcode,
-            latitude,
-            longitude,
+                name,
+                username,
+                email,
+                passwordHash: hash,
+                zipcode: parseInt(zipcode),
+                latitude,
+                longitude,
+                imageURL: imagePath,
             },
         });
 
@@ -51,6 +55,7 @@ auth.post('/signup', async (req, res) => {
         res.send({ userID : user.id, message: 'user auth successful' })
 
         } catch (error) {
+            console.error(error)
             res.send({ message: 'An error occurred during sign up.' });
         }
 });

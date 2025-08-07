@@ -2,6 +2,8 @@ const express = require('express')
 const cors = require('cors')
 const session = require('express-session')
 
+const path = require('path');
+
 const app = express()
 const PORT = process.env.PORT || 3000 
 
@@ -28,6 +30,8 @@ app.use(session({
 app.use('/api/auth', auth)
 app.use('/api/user', user)
 app.use('/api/posts', posts)
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/storagePost', express.static('storagePost'));
 
 app.use((err, req, res, next) => {
     if (err instanceof ValidationError) {

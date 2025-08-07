@@ -1,17 +1,30 @@
+@keyframes popupAnimation {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
 .popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #F5D3C8;
-  padding: 20px;
-  border: none;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  width: 80%;
-  max-width: 600px;
-  max-height: 600px;
-  z-index: 10;
+    animation: popupAnimation 0.4s ease-out;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(66, 80, 87, 0.7);
+    padding: 20px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 600px;
+    max-height: 600px;
+    z-index: 10;
+    color: white;
 }
 .overlay {
   position: fixed;
@@ -28,40 +41,83 @@
   flex-wrap: wrap;
   justify-content: center;
   overflow: scroll;
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+
     form {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
+        max-width: 100vw;
+        align-items: stretch;
+        gap: 10px;
 
         h2 {
             margin-top: 0px;
         }
         label {
-            margin: 10px;
+            font-weight: bold;
+            margin-bottom: 4px;
         }
     }
+
+    input[type="text"],
+    input[type="number"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: small;
+    }
+
+    .imageField {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      
+      button {
+        width: 50%;
+      }
+    }
+
+    textarea {
+      resize: vertical;
+      background-color: rgb(229, 228, 228);
+    }
+
     .closeButton {
         display: flex;
-        padding-left: 550px;
-        color: #191923;
-        background-color: transparent;
-        font-size: x-large;
-        border: none;
+        position: absolute;
+        right: 12px;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        font-size: 1.5rem;
         font-weight: bold;
-    }
-    .close:hover{
-        text-decoration: none;
-        cursor: pointer;
-        background-color: transparent;
         border: none;
+        background-color: transparent;
+        color: white;
+        cursor: pointer;
+        line-height: 1;
+        font-family: inherit;
+        -webkit-font-smoothing: antialiased;
+        transform: translateZ(0);
+    }
+
+    .closeButton:hover {
         color: black;
     }
 
     .popupButton {
-        background-color: #093824;
-        color: white;
+        background-color: #CAD2C5;
+        color: black;
         margin-top: 10px;
+        font-weight: 400;
     }
     img {
         width: 200px;

@@ -6,13 +6,15 @@
   flex-wrap: wrap;
 }
 .profilePage {
-  background-color: white;
+  background-color: rgba(66, 80, 87, 0.6);
+  box-shadow: 0 0 90px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   padding: 30px;
   border-radius: 30px;
   margin: 1vh 6vw;
   flex-wrap: wrap;
+  color: white;
 
     .mainPfp {
         display: flex;
@@ -39,10 +41,11 @@
 
         .allInfo {
             text-align: left;
-            background-color: rgb(210, 197, 196);
+            background-color: #CAD2C5;
             padding: 10px;
             border-radius: 20px;
             flex-wrap: wrap;
+            color: black;
 
             .textBkgnd {
                 display: flex;
@@ -51,27 +54,69 @@
                 border-radius: 10px;
                 flex-wrap: wrap;
             }
+
+            button {
+                margin-top: 5px;
+                background-color: rgb(242, 235, 235);
+            }
         }
 
         .preferences {
+            display: flex;
             text-align: left;
-            background-color: rgb(210, 197, 196);
+            background-color: #CAD2C5;
             padding: 10px;
             border-radius: 20px;
+            color: black;
+            gap: 5vw;
+            height: 35vh;
+            overflow-y: scroll;
+
+            .multi-select {
+                width: 150px;
+                color: #363636;
+                background-color: #f5fbef;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                padding: 4px 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                outline: none;
+                cursor: pointer;
+                overflow-y: auto;
+                height: auto;
+                font-family: "Outfit", sans-serif;
+                font-optical-sizing: auto;
+                font-weight: 300;
+                font-style: normal;
+            }
+            .multi-select option {
+                padding: 2px 6px;
+            }
+            .multi-select option:checked {
+                background-color: #9D8189;
+                color: white;
+                font-weight: 500;
+            }
 
             .preferredItem {
                 display: flex;
                 flex-direction: row;
                 flex-wrap: wrap;
                 gap: 3px;
-                overflow: scroll;
                 flex-wrap: wrap;
+                overflow: scroll;
 
                 button {
                     background-color: rgb(242, 235, 235);
                 }
             }
         }
+    }
+
+    button {
+        margin-right: 10px;
+        background-color: rgba(202, 210, 197, 1);
+        margin-top: 10px;
     }
 
     .logoutButton {
@@ -83,7 +128,6 @@
 
 @media only screen and (max-width: 699px) {
     .profilePage {
-        background-color: white;
         display: flex;
         flex-direction: column;
         padding: 30px;
@@ -92,6 +136,7 @@
         align-items: center;
         margin: 1vh 6vw;
         flex-wrap: wrap;
+        color: white;
 
             .mainPfp {
                 display: flex;
@@ -125,6 +170,7 @@
                     padding: 10px;
                     border-radius: 20px;
                     flex-wrap: wrap;
+                    color: black;
 
                     .textBkgnd {
                         display: flex;
@@ -137,9 +183,10 @@
 
                 .preferences {
                     text-align: left;
-                    background-color: rgb(210, 197, 196);
+                    background-color: #CAD2C5;
                     padding: 10px;
                     border-radius: 20px;
+                    color: black;
 
                     .preferredItem {
                         display: flex;

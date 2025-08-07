@@ -1,6 +1,7 @@
 .rightNavColumn {
     display: flex;
     flex-direction: column;
+    padding-top: 30px;
 
     .upcomingEvents {
         text-align: left;
@@ -44,25 +45,33 @@
 
     .suggestions{
         text-align: left;
+        color: white;
+        overflow-y: scroll;
 
         .suggestionsBox {
             display: flex;
             flex-direction: column;
             flex-wrap: wrap;
-            overflow: scroll;
-
 
             .artistInfo {
                 display: flex;
                 flex-direction: row;
-                background-color: #d0c2c2;
+                background-color: rgba(202, 210, 197, 0.8);
                 border-radius: 30px;
                 padding: 10px;
+                justify-content: space-between;
                 align-items: center;
                 gap: 10px;
                 margin-top: 5px;
                 padding-bottom: 10px;
                 flex-wrap: wrap;
+                color: black;
+                
+                .artistLeft {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                }
 
                 img {
                     width: 40px;
@@ -81,8 +90,14 @@
                 }
 
                 .followButton {
+                    color: black;
                     background-color: white;
+                    font-size: small;
+                    border-radius: 20px;
+                    padding-left: 10px;
+                    padding-right: 10px;
                 }
+
             }; 
         };
     };

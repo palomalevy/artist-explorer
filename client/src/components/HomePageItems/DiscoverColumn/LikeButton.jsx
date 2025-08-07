@@ -1,11 +1,10 @@
 import React, { useState} from 'react'
 import { useUser } from "/src/contexts/UserContext";
 
-const LikeButton = ({postID}) => {
+const LikeButton = ({postID, onLike}) => {
   const { user, setUser } = useUser();
   const baseURL = import.meta.env.VITE_BASE_URL
   const likedPosts = user.likedPosts
-
 
   const handleLike = async () => {
     let updatedLikedPosts = []
@@ -16,13 +15,17 @@ const LikeButton = ({postID}) => {
          ...prev, 
          likedPosts: updatedLikedPosts
        }));
+
+    if (onLike) {
+        onLike(postID); 
+      }
  
      } else {
       updatedLikedPosts = likedPosts.filter(id => id !== postID)
-       setUser(prev => ({
-         ...prev,
-         likedPosts: updatedLikedPosts
-       }));
+      setUser(prev => ({
+        ...prev,
+        likedPosts: updatedLikedPosts
+      }));
      }
 
     try {

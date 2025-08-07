@@ -10,6 +10,7 @@ const HomePage = () => {
   const { user, setUser } = useUser();
   const [myPosts, setMyPosts] = useState(false);
   const [discover, setDiscover] = useState(true);
+  const [followingPage, setFollowingPage] = useState(false);
   const baseURL = import.meta.env.VITE_BASE_URL
 
   const fetchUserData = async () => {
@@ -30,10 +31,10 @@ const HomePage = () => {
 
   return (
     <section className="homeBackground">
-        <div>Pulse Home</div>
+        <div>.</div>
         <section className="container">
-            <LeftSideNav user={user} setMyPosts={setMyPosts} setDiscover={setDiscover}/>
-            <Discover user={user} myPosts={myPosts} discover={discover}/>
+            <LeftSideNav user={user} setMyPosts={setMyPosts} setDiscover={setDiscover} setFollowingPage={setFollowingPage}/>
+            <Discover user={user} myPosts={myPosts} discover={discover} followingPage={followingPage} />
             <RightSideNav />
         </section>
     </section>

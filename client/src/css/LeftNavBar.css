@@ -1,5 +1,6 @@
 .leftNavColumn {
     display: flex;
+    margin-top: 10vh;
     flex-direction: column;
     align-items: center;
     
@@ -15,6 +16,7 @@
         .userInfo {
             padding-bottom: 20px;
             text-align: center;
+            color: white;
 
             p {
                 font-size: small;
@@ -24,15 +26,23 @@
 
     .navButtons {
         display: flex;
-        background-color: #d0c2c2;
+        background-color: rgba(202, 210, 197, 0.8);
         padding: 10px;
         border-radius: 20px;
         flex-direction: column;
         gap: 10px;
+        align-items: stretch;
+        width: max-content;
 
         button{
             color: white;
-            background-color: #623a3a;
+            background-color: #425057;
         } 
+        a {
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+        }
+
     }
 }

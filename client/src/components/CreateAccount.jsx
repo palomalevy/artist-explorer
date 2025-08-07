@@ -7,7 +7,8 @@ const CreateAccount = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [zipcode, setZipcode] = useState();
+  const [zipcode, setZipcode] = useState("");
+  const [imageURL, setImageURL] = useState(null);
   const [error, setError] = useState('')
   const [userData, setUserData] = useState({});
   const baseURL = import.meta.env.VITE_BASE_URL
@@ -50,25 +51,27 @@ const CreateAccount = () => {
         event.preventDefault();
         setError('');
 
-        const newUser = {
-          name: event.target.name.value,
-          email: event.target.email.value,
-          username: event.target.username.value,
-          password: event.target.password.value,
-          zipcode: parseInt(event.target.zipcode.value),
+        const formData = new FormData();
+        formData.append('name', event.target.name.value);
+        formData.append('email', event.target.email.value);
+        formData.append('username', event.target.username.value);
+        formData.append('password', event.target.password.value);
+        formData.append('zipcode', parseInt(event.target.zipcode.value));
+
+        if (imageURL) {
+            formData.append('imageURL', imageURL);
         }
 
         try{
             const res = await fetch(`${baseURL}/api/auth/signup`, {
                 method: 'POST',
-                headers: { "Content-Type": "application/json" },
                 credentials: 'include',
-                body: JSON.stringify(newUser),
+                body: formData,
             });
 
-            if (res.ok) {
-                const data = await res.json();
+            const data = await res.json();
 
+            if (res.ok) {
                 if (data.message === "user auth successful") {
                     setUserData(data)
                     navigate(`/home`)
@@ -79,15 +82,14 @@ const CreateAccount = () => {
                 } else if (data.message === "Password must be at least 8 characters long!") {
                         setError(data.message)
                 } else {
-                    const errorData = await res.json();
-                    ServerRouter(errorData.message || 'Signup failed.')
+                    setError(data.message || 'Signup failed.')
                 }
             } else {
-                const errorData = await res.json();
-                ServerRouter(errorData.message || 'Login failed.')
+                setError(data.message || 'Login failed.')
             }
 
         } catch(err) {
+            console.error(err)
             setError('An error ocurred during login.')
         }
     }
@@ -120,13 +122,22 @@ const CreateAccount = () => {
                                         <label className="zipcode">Zipcode</label>
                                         <input type="number" placeholder="Zipcode" name="zipcode" value={zipcode} onChange={handleZipcodeChange} required/>
                                     </div>
+                                    <div className="newImage">
+                                        <label>Profile Picture</label>
+                                        <input
+                                            type="file"
+                                            name="imageURL"
+                                            accept="image/*"
+                                            onChange={(e) => setImageURL(e.target.files[0])}
+                                        />
+                                    </div>
                                 </div>
                                 {error && <p style={{ color: 'red' }}>{error}</p>}
                                 <button className="signupButton" type="submit">Sign Up</button>
                             </div>
                         </form> 
             </section>
-            <p>Already have an account? <Link to="/login">Login</Link></p>
+            <p>Already have an account? <Link to="/login" className='linkTo'>Login</Link></p>
         </section>
     </section>
   )

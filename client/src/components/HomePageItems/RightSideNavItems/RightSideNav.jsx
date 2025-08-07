@@ -42,12 +42,10 @@ const RightSideNav = () => {
   return (
     <>
         <section className="rightNavColumn">
-            <div>RightSideNav</div>
             <section className="suggestions">
                 <h4>Suggestions</h4>
                 <SuggestedBox suggestedUsers={suggestedUsers}/>
             </section>
-            <Logout />
         </section>
     </>
     

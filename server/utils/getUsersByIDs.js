@@ -16,6 +16,7 @@ async function getUsersByIDs(userIDs) {
             id: true,
             username: true,
             name: true,
+            imageURL: true,
         }
     });
 

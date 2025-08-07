@@ -57,7 +57,7 @@ const LoginPage = () => {
   return (
     <section className="loginBox">
         <section className="loginPage">
-            <p>Pulse Logo Here</p>
+            <img src="/pulse-logo.png" width={60}/>
             <h1>Pulse</h1>
             <section className="loginForm">
                 <form onSubmit={handleSubmit}>
@@ -77,7 +77,7 @@ const LoginPage = () => {
                     </div>
                 </form> 
             </section>
-            <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
+            <p>Don't have an account? <Link to="/signup" className="linkTo">Sign Up</Link></p>
         </section>
     </section>
   );
